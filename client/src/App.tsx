@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react'
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom'
 import {
   Bars3Icon,
   CalendarIcon,
@@ -12,14 +13,15 @@ import {
   UsersIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline'
+import VoiceCoach from './components/VoiceCoach'
 
 const navigation = [
-  { name: 'Dashboard', href: '#', icon: HomeIcon, current: true },
-  { name: 'Team', href: '#', icon: UsersIcon, current: false },
-  { name: 'Projects', href: '#', icon: FolderIcon, current: false },
-  { name: 'Calendar', href: '#', icon: CalendarIcon, current: false },
-  { name: 'Documents', href: '#', icon: DocumentDuplicateIcon, current: false },
-  { name: 'Reports', href: '#', icon: ChartPieIcon, current: false },
+  { name: 'Dashboard', href: '/', icon: HomeIcon, current: true },
+  { name: 'Team', href: '/team', icon: UsersIcon, current: false },
+  { name: 'Hackathon', href: '/hackathon', icon: FolderIcon, current: false },
+  { name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false },
+  { name: 'Documents', href: '/documents', icon: DocumentDuplicateIcon, current: false },
+  { name: 'Reports', href: '/reports', icon: ChartPieIcon, current: false },
 ]
 const teams = [
   { id: 1, name: 'Heroicons', href: '#', initial: 'H', current: false },
@@ -35,15 +37,7 @@ export default function Example() {
   const [sidebarOpen, setSidebarOpen] = useState(false)
 
   return (
-    <>
-      {/*
-        This example requires updating your template:
-
-        ```
-        <html class="h-full bg-white">
-        <body class="h-full">
-        ```
-      */}
+    <Router>
       <div>
         <Dialog open={sidebarOpen} onClose={setSidebarOpen} className="relative z-50 lg:hidden">
           <DialogBackdrop
@@ -79,8 +73,8 @@ export default function Example() {
                       <ul role="list" className="-mx-2 space-y-1">
                         {navigation.map((item) => (
                           <li key={item.name}>
-                            <a
-                              href={item.href}
+                            <Link
+                              to={item.href}
                               className={classNames(
                                 item.current
                                   ? 'bg-indigo-700 text-white'
@@ -96,7 +90,7 @@ export default function Example() {
                                 )}
                               />
                               {item.name}
-                            </a>
+                            </Link>
                           </li>
                         ))}
                       </ul>
@@ -148,8 +142,8 @@ export default function Example() {
                   <ul role="list" className="-mx-2 space-y-1">
                     {navigation.map((item) => (
                       <li key={item.name}>
-                        <a
-                          href={item.href}
+                        <Link
+                          to={item.href}
                           className={classNames(
                             item.current
                               ? 'bg-indigo-700 text-white'
@@ -165,12 +159,12 @@ export default function Example() {
                             )}
                           />
                           {item.name}
-                        </a>
+                        </Link>
                       </li>
                     ))}
                   </ul>
                 </li>
-                <li>
+                {/* <li>
                   <div className="text-xs/6 font-semibold text-indigo-200">Your teams</div>
                   <ul role="list" className="-mx-2 mt-2 space-y-1">
                     {teams.map((team) => (
@@ -192,7 +186,7 @@ export default function Example() {
                       </li>
                     ))}
                   </ul>
-                </li>
+                </li> */}
                 <li className="-mx-6 mt-auto">
                   <a
                     href="#"
@@ -200,11 +194,11 @@ export default function Example() {
                   >
                     <img
                       alt=""
-                      src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                      src="https://pbs.twimg.com/profile_images/1506140174895685639/6YpMGBAq_400x400.jpg"
                       className="size-8 rounded-full bg-indigo-700"
                     />
                     <span className="sr-only">Your profile</span>
-                    <span aria-hidden="true">Tom Cook</span>
+                    <span aria-hidden="true">Deepak Cheenath</span>
                   </a>
                 </li>
               </ul>
@@ -229,9 +223,16 @@ export default function Example() {
         </div>
 
         <main className="py-10 lg:pl-72">
-          <div className="px-4 sm:px-6 lg:px-8">{/* Your content */}</div>
+          <Routes>
+            <Route path="/" element={<div className="px-4 sm:px-6 lg:px-8">Dashboard Content</div>} />
+            <Route path="/hackathon" element={<VoiceCoach />} />
+            <Route path="/team" element={<div className="px-4 sm:px-6 lg:px-8">Team Content</div>} />
+            <Route path="/calendar" element={<div className="px-4 sm:px-6 lg:px-8">Calendar Content</div>} />
+            <Route path="/documents" element={<div className="px-4 sm:px-6 lg:px-8">Documents Content</div>} />
+            <Route path="/reports" element={<div className="px-4 sm:px-6 lg:px-8">Reports Content</div>} />
+          </Routes>
         </main>
       </div>
-    </>
+    </Router>
   )
 }

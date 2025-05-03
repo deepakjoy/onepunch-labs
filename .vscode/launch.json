@@ -1,0 +1,18 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "type": "node",
+        "request": "launch",
+        "name": "Debug TypeScript (ts-node)",
+        "program": "${workspaceFolder}/server/index.ts",
+        "runtimeArgs": [
+          "-r",
+          "ts-node/register"
+        ],
+        "envFile": "${workspaceFolder}/server/.env",
+        "cwd": "${workspaceFolder}/server",
+        "skipFiles": ["<node_internals>/**"]
+      }
+    ]
+}

@@ -1,0 +1,5955 @@
+{
+  "segments": [
+    {
+      "text": "Hi, Deepak. Thanks for taking my call today. I'm Linda from Noodli. I'm really interested in learning more about your offering. I've been hearing good things about what you're doing. ",
+      "words": [
+        {
+          "text": "Hi,",
+          "start": 3.22,
+          "end": 3.399,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 3.399,
+          "end": 3.419,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Deepak.",
+          "start": 3.419,
+          "end": 3.839,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 3.839,
+          "end": 3.839,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Thanks",
+          "start": 3.839,
+          "end": 4.019,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 4.019,
+          "end": 4.039,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "for",
+          "start": 4.039,
+          "end": 4.159,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 4.159,
+          "end": 4.159,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "taking",
+          "start": 4.159,
+          "end": 4.419,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 4.419,
+          "end": 4.42,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "my",
+          "start": 4.42,
+          "end": 4.559,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 4.559,
+          "end": 4.579,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "call",
+          "start": 4.579,
+          "end": 4.739,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 4.739,
+          "end": 4.779,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "today.",
+          "start": 4.779,
+          "end": 5.219,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 5.219,
+          "end": 5.339,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "I'm",
+          "start": 5.339,
+          "end": 5.439,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 5.439,
+          "end": 5.48,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Linda",
+          "start": 5.48,
+          "end": 5.719,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 5.719,
+          "end": 5.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "from",
+          "start": 5.739,
+          "end": 5.879,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 5.879,
+          "end": 5.92,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Noodli.",
+          "start": 5.92,
+          "end": 6.379,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 6.379,
+          "end": 6.879,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "I'm",
+          "start": 6.879,
+          "end": 7.039,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 7.039,
+          "end": 7.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "really",
+          "start": 7.059,
+          "end": 7.339,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 7.339,
+          "end": 7.379,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "interested",
+          "start": 7.379,
+          "end": 7.739,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 7.739,
+          "end": 7.759,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "in",
+          "start": 7.759,
+          "end": 7.839,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 7.839,
+          "end": 7.859,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "learning",
+          "start": 7.859,
+          "end": 8.079,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 8.079,
+          "end": 8.159,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "more",
+          "start": 8.159,
+          "end": 8.279,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 8.279,
+          "end": 8.3,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "about",
+          "start": 8.3,
+          "end": 8.5,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 8.5,
+          "end": 8.579,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "your",
+          "start": 8.579,
+          "end": 8.759,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 8.759,
+          "end": 8.8,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "offering.",
+          "start": 8.8,
+          "end": 9.4,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 9.4,
+          "end": 9.8,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "I've",
+          "start": 9.8,
+          "end": 9.96,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 9.96,
+          "end": 9.979,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "been",
+          "start": 9.979,
+          "end": 10.099,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 10.099,
+          "end": 10.139,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "hearing",
+          "start": 10.139,
+          "end": 10.42,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 10.42,
+          "end": 10.42,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "good",
+          "start": 10.42,
+          "end": 10.659,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 10.659,
+          "end": 10.699,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "things",
+          "start": 10.699,
+          "end": 10.92,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 10.92,
+          "end": 10.939,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "about",
+          "start": 10.939,
+          "end": 11.1,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 11.1,
+          "end": 11.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "what",
+          "start": 11.119,
+          "end": 11.279,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 11.279,
+          "end": 11.3,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "you're",
+          "start": 11.3,
+          "end": 11.44,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 11.44,
+          "end": 11.46,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "doing.",
+          "start": 11.46,
+          "end": 11.84,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 11.84,
+          "end": 13.719,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        }
+      ]
+    },
+    {
+      "text": "Hey. So Slack, I think would be, uh, great for you guys if you, uh... Actually, before we get into that, I wanted to understand what you're looking for. ",
+      "words": [
+        {
+          "text": "Hey.",
+          "start": 13.719,
+          "end": 13.999,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 13.999,
+          "end": 14.039,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "So",
+          "start": 14.039,
+          "end": 14.159,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 14.159,
+          "end": 14.239,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "Slack,",
+          "start": 14.239,
+          "end": 14.839,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 14.839,
+          "end": 15.339,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "I",
+          "start": 15.339,
+          "end": 15.499,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 15.499,
+          "end": 15.519,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "think",
+          "start": 15.519,
+          "end": 15.859,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 15.859,
+          "end": 15.859,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "would",
+          "start": 15.859,
+          "end": 16.079,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 16.079,
+          "end": 16.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "be,",
+          "start": 16.119,
+          "end": 16.339,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 16.339,
+          "end": 16.659,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "uh,",
+          "start": 16.659,
+          "end": 16.84,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 16.84,
+          "end": 16.859,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "great",
+          "start": 16.859,
+          "end": 17.18,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 17.18,
+          "end": 17.26,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "for",
+          "start": 17.26,
+          "end": 17.359,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 17.359,
+          "end": 17.399,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you",
+          "start": 17.399,
+          "end": 17.52,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 17.52,
+          "end": 17.539,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "guys",
+          "start": 17.539,
+          "end": 17.839,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 17.839,
+          "end": 17.899,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "if",
+          "start": 17.899,
+          "end": 18.239,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 18.239,
+          "end": 18.939,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you,",
+          "start": 18.939,
+          "end": 19.28,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 19.28,
+          "end": 19.42,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "uh...",
+          "start": 19.42,
+          "end": 19.639,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 19.639,
+          "end": 19.699,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "Actually,",
+          "start": 19.699,
+          "end": 20.059,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 20.059,
+          "end": 20.479,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "before",
+          "start": 20.479,
+          "end": 20.779,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 20.779,
+          "end": 20.819,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "we",
+          "start": 20.819,
+          "end": 20.92,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 20.92,
+          "end": 20.939,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "get",
+          "start": 20.939,
+          "end": 21.099,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 21.099,
+          "end": 21.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "into",
+          "start": 21.119,
+          "end": 21.379,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 21.379,
+          "end": 21.399,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "that,",
+          "start": 21.399,
+          "end": 21.619,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 21.619,
+          "end": 21.619,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "I",
+          "start": 21.619,
+          "end": 21.719,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 21.719,
+          "end": 21.719,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "wanted",
+          "start": 21.719,
+          "end": 21.959,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 21.959,
+          "end": 21.979,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "to",
+          "start": 21.979,
+          "end": 22.06,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 22.06,
+          "end": 22.1,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "understand",
+          "start": 22.1,
+          "end": 22.719,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 22.719,
+          "end": 23.299,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "what",
+          "start": 23.299,
+          "end": 23.5,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 23.5,
+          "end": 23.519,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you're",
+          "start": 23.519,
+          "end": 23.659,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 23.659,
+          "end": 23.699,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "looking",
+          "start": 23.699,
+          "end": 23.94,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 23.94,
+          "end": 24.039,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "for.",
+          "start": 24.039,
+          "end": 24.319,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 24.319,
+          "end": 27.319,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        }
+      ]
+    },
+    {
+      "text": "Well, we're having some challenges with our internal communication at Noodli. Our team has grown pretty quickly in the past year, and honestly, things are getting a bit messy. Information gets lost. People miss important updates. It's frustrating. I'd love to hear how you might help with that. ",
+      "words": [
+        {
+          "text": "Well,",
+          "start": 27.319,
+          "end": 28.78,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 28.78,
+          "end": 28.84,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "we're",
+          "start": 28.84,
+          "end": 28.979,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 28.979,
+          "end": 29.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "having",
+          "start": 29.059,
+          "end": 29.26,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 29.26,
+          "end": 29.26,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "some",
+          "start": 29.26,
+          "end": 29.419,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 29.419,
+          "end": 29.5,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "challenges",
+          "start": 29.5,
+          "end": 29.979,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 29.979,
+          "end": 29.979,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "with",
+          "start": 29.979,
+          "end": 30.139,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 30.139,
+          "end": 30.159,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "our",
+          "start": 30.159,
+          "end": 30.379,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 30.379,
+          "end": 30.42,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "internal",
+          "start": 30.42,
+          "end": 30.759,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 30.759,
+          "end": 30.84,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "communication",
+          "start": 30.84,
+          "end": 31.439,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 31.439,
+          "end": 31.439,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "at",
+          "start": 31.439,
+          "end": 31.559,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 31.559,
+          "end": 31.599,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Noodli.",
+          "start": 31.599,
+          "end": 32.079,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 32.079,
+          "end": 32.139,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Our",
+          "start": 32.139,
+          "end": 32.259,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 32.259,
+          "end": 32.319,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "team",
+          "start": 32.319,
+          "end": 32.5,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 32.5,
+          "end": 32.52,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "has",
+          "start": 32.52,
+          "end": 32.68,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 32.68,
+          "end": 32.7,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "grown",
+          "start": 32.7,
+          "end": 32.939,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 32.939,
+          "end": 32.959,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "pretty",
+          "start": 32.959,
+          "end": 33.139,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 33.139,
+          "end": 33.219,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "quickly",
+          "start": 33.219,
+          "end": 33.479,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 33.479,
+          "end": 33.479,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "in",
+          "start": 33.479,
+          "end": 33.58,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 33.58,
+          "end": 33.599,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "the",
+          "start": 33.599,
+          "end": 33.7,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 33.7,
+          "end": 33.719,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "past",
+          "start": 33.719,
+          "end": 33.96,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 33.96,
+          "end": 34.02,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "year,",
+          "start": 34.02,
+          "end": 34.24,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 34.24,
+          "end": 34.259,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "and",
+          "start": 34.259,
+          "end": 34.419,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 34.419,
+          "end": 34.419,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "honestly,",
+          "start": 34.419,
+          "end": 34.96,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 34.96,
+          "end": 35.04,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "things",
+          "start": 35.04,
+          "end": 35.24,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 35.24,
+          "end": 35.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "are",
+          "start": 35.279,
+          "end": 35.38,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 35.38,
+          "end": 35.439,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "getting",
+          "start": 35.439,
+          "end": 35.68,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 35.68,
+          "end": 35.7,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "a",
+          "start": 35.7,
+          "end": 35.74,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 35.74,
+          "end": 35.819,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "bit",
+          "start": 35.819,
+          "end": 36.059,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 36.059,
+          "end": 36.079,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "messy.",
+          "start": 36.079,
+          "end": 36.539,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 36.539,
+          "end": 37.04,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Information",
+          "start": 37.04,
+          "end": 37.52,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 37.52,
+          "end": 37.559,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "gets",
+          "start": 37.559,
+          "end": 37.779,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 37.779,
+          "end": 37.86,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "lost.",
+          "start": 37.86,
+          "end": 38.279,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 38.279,
+          "end": 38.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "People",
+          "start": 38.279,
+          "end": 38.52,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 38.52,
+          "end": 38.54,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "miss",
+          "start": 38.54,
+          "end": 38.719,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 38.719,
+          "end": 38.719,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "important",
+          "start": 38.719,
+          "end": 39.12,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 39.12,
+          "end": 39.159,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "updates.",
+          "start": 39.159,
+          "end": 39.759,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 39.759,
+          "end": 40.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "It's",
+          "start": 40.119,
+          "end": 40.259,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 40.259,
+          "end": 40.299,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "frustrating.",
+          "start": 40.299,
+          "end": 41.0,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 41.0,
+          "end": 41.04,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "I'd",
+          "start": 41.04,
+          "end": 41.2,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 41.2,
+          "end": 41.219,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "love",
+          "start": 41.219,
+          "end": 41.4,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 41.4,
+          "end": 41.419,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "to",
+          "start": 41.419,
+          "end": 41.479,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 41.479,
+          "end": 41.54,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "hear",
+          "start": 41.54,
+          "end": 41.7,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 41.7,
+          "end": 41.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "how",
+          "start": 41.739,
+          "end": 41.86,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 41.86,
+          "end": 41.919,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "you",
+          "start": 41.919,
+          "end": 42.0,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 42.0,
+          "end": 42.079,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "might",
+          "start": 42.079,
+          "end": 42.26,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 42.26,
+          "end": 42.319,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "help",
+          "start": 42.319,
+          "end": 42.519,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 42.519,
+          "end": 42.52,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "with",
+          "start": 42.52,
+          "end": 42.659,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 42.659,
+          "end": 42.68,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "that.",
+          "start": 42.68,
+          "end": 42.979,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 42.979,
+          "end": 44.239,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        }
+      ]
+    },
+    {
+      "text": "And could I ask you what you're using for internal communication now? ",
+      "words": [
+        {
+          "text": "And",
+          "start": 44.239,
+          "end": 44.539,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 44.539,
+          "end": 44.639,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "could",
+          "start": 44.639,
+          "end": 44.779,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 44.779,
+          "end": 44.799,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "I",
+          "start": 44.799,
+          "end": 44.879,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 44.879,
+          "end": 44.879,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "ask",
+          "start": 44.879,
+          "end": 45.159,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 45.159,
+          "end": 45.2,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you",
+          "start": 45.2,
+          "end": 45.299,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 45.299,
+          "end": 45.34,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "what",
+          "start": 45.34,
+          "end": 45.56,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 45.56,
+          "end": 45.719,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you're",
+          "start": 45.719,
+          "end": 45.88,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 45.88,
+          "end": 45.939,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "using",
+          "start": 45.939,
+          "end": 46.24,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 46.24,
+          "end": 46.259,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "for",
+          "start": 46.259,
+          "end": 46.36,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 46.36,
+          "end": 46.399,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "internal",
+          "start": 46.399,
+          "end": 46.7,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 46.7,
+          "end": 46.759,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "communication",
+          "start": 46.759,
+          "end": 47.42,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 47.42,
+          "end": 47.5,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "now?",
+          "start": 47.5,
+          "end": 47.78,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 47.78,
+          "end": 51.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        }
+      ]
+    },
+    {
+      "text": "We're mostly using email, and we have this old messaging system. I forget the name, but it's really clunky. Some teams are also using WhatsApp groups, which isn't ideal for work stuff. It's all over the place, to be honest. ",
+      "words": [
+        {
+          "text": "We're",
+          "start": 51.119,
+          "end": 52.04,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 52.04,
+          "end": 52.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "mostly",
+          "start": 52.059,
+          "end": 52.36,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 52.36,
+          "end": 52.419,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "using",
+          "start": 52.419,
+          "end": 52.659,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 52.659,
+          "end": 52.719,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "email,",
+          "start": 52.719,
+          "end": 53.159,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 53.159,
+          "end": 53.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "and",
+          "start": 53.279,
+          "end": 53.36,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 53.36,
+          "end": 53.379,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "we",
+          "start": 53.379,
+          "end": 53.499,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 53.499,
+          "end": 53.539,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "have",
+          "start": 53.539,
+          "end": 53.659,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 53.659,
+          "end": 53.68,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "this",
+          "start": 53.68,
+          "end": 53.819,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 53.819,
+          "end": 53.899,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "old",
+          "start": 53.899,
+          "end": 54.08,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 54.08,
+          "end": 54.139,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "messaging",
+          "start": 54.139,
+          "end": 54.54,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 54.54,
+          "end": 54.619,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "system.",
+          "start": 54.619,
+          "end": 55.0,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 55.0,
+          "end": 55.0,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "I",
+          "start": 55.0,
+          "end": 55.08,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 55.08,
+          "end": 55.139,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "forget",
+          "start": 55.139,
+          "end": 55.38,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 55.38,
+          "end": 55.399,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "the",
+          "start": 55.399,
+          "end": 55.5,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 55.5,
+          "end": 55.579,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "name,",
+          "start": 55.579,
+          "end": 55.86,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 55.86,
+          "end": 55.879,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "but",
+          "start": 55.879,
+          "end": 56.0,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 56.0,
+          "end": 56.0,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "it's",
+          "start": 56.0,
+          "end": 56.34,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 56.34,
+          "end": 56.459,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "really",
+          "start": 56.459,
+          "end": 56.659,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 56.659,
+          "end": 56.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "clunky.",
+          "start": 56.739,
+          "end": 57.219,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 57.219,
+          "end": 57.86,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Some",
+          "start": 57.86,
+          "end": 58.04,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 58.04,
+          "end": 58.099,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "teams",
+          "start": 58.099,
+          "end": 58.319,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 58.319,
+          "end": 58.34,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "are",
+          "start": 58.34,
+          "end": 58.479,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 58.479,
+          "end": 58.52,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "also",
+          "start": 58.52,
+          "end": 58.76,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 58.76,
+          "end": 58.819,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "using",
+          "start": 58.819,
+          "end": 59.04,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 59.04,
+          "end": 59.079,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "WhatsApp",
+          "start": 59.079,
+          "end": 59.439,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 59.439,
+          "end": 59.479,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "groups,",
+          "start": 59.479,
+          "end": 59.899,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 59.899,
+          "end": 59.979,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "which",
+          "start": 59.979,
+          "end": 60.159,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 60.159,
+          "end": 60.18,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "isn't",
+          "start": 60.18,
+          "end": 60.4,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 60.4,
+          "end": 60.419,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "ideal",
+          "start": 60.419,
+          "end": 60.759,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 60.759,
+          "end": 60.819,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "for",
+          "start": 60.819,
+          "end": 60.939,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 60.939,
+          "end": 61.0,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "work",
+          "start": 61.0,
+          "end": 61.199,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 61.199,
+          "end": 61.219,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "stuff.",
+          "start": 61.219,
+          "end": 61.6,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 61.6,
+          "end": 61.899,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "It's",
+          "start": 61.899,
+          "end": 62.08,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 62.08,
+          "end": 62.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "all",
+          "start": 62.119,
+          "end": 62.279,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 62.279,
+          "end": 62.399,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "over",
+          "start": 62.399,
+          "end": 62.6,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 62.6,
+          "end": 62.619,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "the",
+          "start": 62.619,
+          "end": 62.7,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 62.7,
+          "end": 62.759,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "place,",
+          "start": 62.759,
+          "end": 63.0,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 63.0,
+          "end": 63.02,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "to",
+          "start": 63.02,
+          "end": 63.079,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 63.079,
+          "end": 63.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "be",
+          "start": 63.119,
+          "end": 63.2,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 63.2,
+          "end": 63.299,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "honest.",
+          "start": 63.299,
+          "end": 63.779,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 63.779,
+          "end": 65.819,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        }
+      ]
+    },
+    {
+      "text": "I see. I see. And, uh, could you tell me, uh, ",
+      "words": [
+        {
+          "text": "I",
+          "start": 65.819,
+          "end": 65.98,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 65.98,
+          "end": 66.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "see.",
+          "start": 66.059,
+          "end": 66.339,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 66.339,
+          "end": 66.339,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "I",
+          "start": 66.339,
+          "end": 66.419,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 66.419,
+          "end": 66.5,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "see.",
+          "start": 66.5,
+          "end": 66.699,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 66.699,
+          "end": 66.839,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "And,",
+          "start": 66.839,
+          "end": 67.279,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 67.279,
+          "end": 67.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "uh,",
+          "start": 67.279,
+          "end": 67.5,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 67.5,
+          "end": 67.639,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "could",
+          "start": 67.639,
+          "end": 67.8,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 67.8,
+          "end": 67.839,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you",
+          "start": 67.839,
+          "end": 67.919,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 67.919,
+          "end": 68.019,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "tell",
+          "start": 68.019,
+          "end": 68.22,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 68.22,
+          "end": 68.319,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "me,",
+          "start": 68.319,
+          "end": 68.68,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 68.68,
+          "end": 69.36,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "uh,",
+          "start": 69.36,
+          "end": 70.0,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 70.0,
+          "end": 71.199,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        }
+      ]
+    },
+    {
+      "text": "what people use whe- do you have anything in terms of a knowledge base or something that you can look up for information? ",
+      "words": [
+        {
+          "text": "what",
+          "start": 71.199,
+          "end": 71.519,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 71.519,
+          "end": 72.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "people",
+          "start": 72.059,
+          "end": 72.379,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 72.379,
+          "end": 72.439,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "use",
+          "start": 72.439,
+          "end": 72.699,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 72.699,
+          "end": 72.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "whe-",
+          "start": 72.739,
+          "end": 72.939,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 72.939,
+          "end": 73.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "do",
+          "start": 73.059,
+          "end": 73.159,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 73.159,
+          "end": 73.199,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you",
+          "start": 73.199,
+          "end": 73.279,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 73.279,
+          "end": 73.319,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "have",
+          "start": 73.319,
+          "end": 73.459,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 73.459,
+          "end": 73.5,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "anything",
+          "start": 73.5,
+          "end": 74.019,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 74.019,
+          "end": 74.299,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "in",
+          "start": 74.299,
+          "end": 74.44,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 74.44,
+          "end": 74.519,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "terms",
+          "start": 74.519,
+          "end": 74.8,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 74.8,
+          "end": 74.819,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "of",
+          "start": 74.819,
+          "end": 74.919,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 74.919,
+          "end": 74.939,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "a",
+          "start": 74.939,
+          "end": 74.999,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 74.999,
+          "end": 75.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "knowledge",
+          "start": 75.059,
+          "end": 75.399,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 75.399,
+          "end": 75.459,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "base",
+          "start": 75.459,
+          "end": 75.7,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 75.7,
+          "end": 75.72,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "or",
+          "start": 75.72,
+          "end": 75.819,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 75.819,
+          "end": 75.839,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "something",
+          "start": 75.839,
+          "end": 76.22,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 76.22,
+          "end": 76.239,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "that",
+          "start": 76.239,
+          "end": 76.399,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 76.399,
+          "end": 76.439,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you",
+          "start": 76.439,
+          "end": 76.54,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 76.54,
+          "end": 76.559,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "can",
+          "start": 76.559,
+          "end": 76.719,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 76.719,
+          "end": 76.779,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "look",
+          "start": 76.779,
+          "end": 76.959,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 76.959,
+          "end": 77.0,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "up",
+          "start": 77.0,
+          "end": 77.22,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 77.22,
+          "end": 77.819,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "for",
+          "start": 77.819,
+          "end": 78.059,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 78.059,
+          "end": 78.099,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "information?",
+          "start": 78.099,
+          "end": 78.759,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 78.759,
+          "end": 82.86,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        }
+      ]
+    },
+    {
+      "text": "Right now, it's kind of scattered. We have some shared Google Docs, and there's a wiki that hardly anyone updates anymore. The marketing team has their own system, and product keeps stuff in Notion, but there's no central place where everyone can find what they need. Sometimes I spend way too much time just tracking down basic information. ",
+      "words": [
+        {
+          "text": "Right",
+          "start": 82.86,
+          "end": 83.039,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 83.039,
+          "end": 83.099,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "now,",
+          "start": 83.099,
+          "end": 83.379,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 83.379,
+          "end": 83.419,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "it's",
+          "start": 83.419,
+          "end": 83.579,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 83.579,
+          "end": 83.599,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "kind",
+          "start": 83.599,
+          "end": 83.759,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 83.759,
+          "end": 83.759,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "of",
+          "start": 83.759,
+          "end": 83.839,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 83.839,
+          "end": 83.879,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "scattered.",
+          "start": 83.879,
+          "end": 84.339,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 84.339,
+          "end": 84.839,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "We",
+          "start": 84.839,
+          "end": 85.0,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 85.0,
+          "end": 85.04,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "have",
+          "start": 85.04,
+          "end": 85.179,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 85.179,
+          "end": 85.199,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "some",
+          "start": 85.199,
+          "end": 85.319,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 85.319,
+          "end": 85.379,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "shared",
+          "start": 85.379,
+          "end": 85.62,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 85.62,
+          "end": 85.68,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Google",
+          "start": 85.68,
+          "end": 85.899,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 85.899,
+          "end": 85.939,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Docs,",
+          "start": 85.939,
+          "end": 86.259,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 86.259,
+          "end": 86.259,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "and",
+          "start": 86.259,
+          "end": 86.36,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 86.36,
+          "end": 86.36,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "there's",
+          "start": 86.36,
+          "end": 86.519,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 86.519,
+          "end": 86.54,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "a",
+          "start": 86.54,
+          "end": 86.599,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 86.599,
+          "end": 86.619,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "wiki",
+          "start": 86.619,
+          "end": 86.94,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 86.94,
+          "end": 86.979,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "that",
+          "start": 86.979,
+          "end": 87.139,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 87.139,
+          "end": 87.18,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "hardly",
+          "start": 87.18,
+          "end": 87.48,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 87.48,
+          "end": 87.559,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "anyone",
+          "start": 87.559,
+          "end": 87.859,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 87.859,
+          "end": 87.9,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "updates",
+          "start": 87.9,
+          "end": 88.279,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 88.279,
+          "end": 88.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "anymore.",
+          "start": 88.279,
+          "end": 88.699,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 88.699,
+          "end": 89.139,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "The",
+          "start": 89.139,
+          "end": 89.22,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 89.22,
+          "end": 89.259,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "marketing",
+          "start": 89.259,
+          "end": 89.559,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 89.559,
+          "end": 89.619,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "team",
+          "start": 89.619,
+          "end": 89.779,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 89.779,
+          "end": 89.819,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "has",
+          "start": 89.819,
+          "end": 89.939,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 89.939,
+          "end": 89.939,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "their",
+          "start": 89.939,
+          "end": 90.079,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 90.079,
+          "end": 90.099,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "own",
+          "start": 90.099,
+          "end": 90.22,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 90.22,
+          "end": 90.259,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "system,",
+          "start": 90.259,
+          "end": 90.639,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 90.639,
+          "end": 90.639,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "and",
+          "start": 90.639,
+          "end": 90.719,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 90.719,
+          "end": 90.779,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "product",
+          "start": 90.779,
+          "end": 91.079,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 91.079,
+          "end": 91.099,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "keeps",
+          "start": 91.099,
+          "end": 91.299,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 91.299,
+          "end": 91.319,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "stuff",
+          "start": 91.319,
+          "end": 91.54,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 91.54,
+          "end": 91.559,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "in",
+          "start": 91.559,
+          "end": 91.639,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 91.639,
+          "end": 91.68,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Notion,",
+          "start": 91.68,
+          "end": 91.999,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 91.999,
+          "end": 92.019,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "but",
+          "start": 92.019,
+          "end": 92.159,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 92.159,
+          "end": 92.18,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "there's",
+          "start": 92.18,
+          "end": 92.36,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 92.36,
+          "end": 92.439,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "no",
+          "start": 92.439,
+          "end": 92.58,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 92.58,
+          "end": 92.659,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "central",
+          "start": 92.659,
+          "end": 92.959,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 92.959,
+          "end": 93.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "place",
+          "start": 93.059,
+          "end": 93.279,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 93.279,
+          "end": 93.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "where",
+          "start": 93.279,
+          "end": 93.459,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 93.459,
+          "end": 93.579,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "everyone",
+          "start": 93.579,
+          "end": 93.919,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 93.919,
+          "end": 93.979,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "can",
+          "start": 93.979,
+          "end": 94.139,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 94.139,
+          "end": 94.159,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "find",
+          "start": 94.159,
+          "end": 94.319,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 94.319,
+          "end": 94.319,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "what",
+          "start": 94.319,
+          "end": 94.459,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 94.459,
+          "end": 94.479,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "they",
+          "start": 94.479,
+          "end": 94.639,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 94.639,
+          "end": 94.659,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "need.",
+          "start": 94.659,
+          "end": 94.919,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 94.919,
+          "end": 95.479,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "Sometimes",
+          "start": 95.479,
+          "end": 95.879,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 95.879,
+          "end": 95.9,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "I",
+          "start": 95.9,
+          "end": 95.979,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 95.979,
+          "end": 95.979,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "spend",
+          "start": 95.979,
+          "end": 96.159,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 96.159,
+          "end": 96.199,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "way",
+          "start": 96.199,
+          "end": 96.319,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 96.319,
+          "end": 96.379,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "too",
+          "start": 96.379,
+          "end": 96.459,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 96.459,
+          "end": 96.5,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "much",
+          "start": 96.5,
+          "end": 96.659,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 96.659,
+          "end": 96.699,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "time",
+          "start": 96.699,
+          "end": 96.879,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 96.879,
+          "end": 96.919,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "just",
+          "start": 96.919,
+          "end": 97.079,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 97.079,
+          "end": 97.079,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "tracking",
+          "start": 97.079,
+          "end": 97.399,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 97.399,
+          "end": 97.459,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "down",
+          "start": 97.459,
+          "end": 97.599,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 97.599,
+          "end": 97.639,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "basic",
+          "start": 97.639,
+          "end": 97.919,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 97.919,
+          "end": 97.959,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": "information.",
+          "start": 97.959,
+          "end": 98.519,
+          "type": "word",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 98.519,
+          "end": 100.04,
+          "type": "spacing",
+          "speaker_id": "Speaker 0",
+          "characters": null
+        }
+      ]
+    },
+    {
+      "text": "I see. I see. So let me tell you a little bit about how Slack works and why, uh, personally, you know, we find Slack helps us to do a lot of things with a really simple tool. So, uh, to start with, Slack focuses on using chat as the primary way of communication. So texting, uh, is how you could think about it. So not so different from WhatsApp but built for professional communication within your team, right? And so, uh, ",
+      "words": [
+        {
+          "text": "I",
+          "start": 100.04,
+          "end": 100.239,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 100.239,
+          "end": 100.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "see.",
+          "start": 100.279,
+          "end": 100.539,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 100.539,
+          "end": 100.559,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "I",
+          "start": 100.559,
+          "end": 100.68,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 100.68,
+          "end": 100.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "see.",
+          "start": 100.739,
+          "end": 100.959,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 100.959,
+          "end": 100.979,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "So",
+          "start": 100.979,
+          "end": 101.059,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 101.059,
+          "end": 101.099,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "let",
+          "start": 101.099,
+          "end": 101.239,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 101.239,
+          "end": 101.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "me",
+          "start": 101.279,
+          "end": 101.439,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 101.439,
+          "end": 101.439,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "tell",
+          "start": 101.439,
+          "end": 101.639,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 101.639,
+          "end": 101.659,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you",
+          "start": 101.659,
+          "end": 101.72,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 101.72,
+          "end": 101.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "a",
+          "start": 101.739,
+          "end": 101.799,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 101.799,
+          "end": 101.819,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "little",
+          "start": 101.819,
+          "end": 102.019,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 102.019,
+          "end": 102.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "bit",
+          "start": 102.119,
+          "end": 102.339,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 102.339,
+          "end": 102.379,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "about",
+          "start": 102.379,
+          "end": 102.939,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 102.939,
+          "end": 103.459,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "how",
+          "start": 103.459,
+          "end": 103.599,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 103.599,
+          "end": 103.659,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "Slack",
+          "start": 103.659,
+          "end": 104.019,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 104.019,
+          "end": 104.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "works",
+          "start": 104.059,
+          "end": 104.479,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 104.479,
+          "end": 104.5,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "and",
+          "start": 104.5,
+          "end": 104.699,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 104.699,
+          "end": 104.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "why,",
+          "start": 104.739,
+          "end": 104.939,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 104.939,
+          "end": 105.619,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "uh,",
+          "start": 105.619,
+          "end": 105.879,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 105.879,
+          "end": 106.04,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "personally,",
+          "start": 106.04,
+          "end": 106.499,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 106.499,
+          "end": 106.519,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you",
+          "start": 106.519,
+          "end": 106.599,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 106.599,
+          "end": 106.599,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "know,",
+          "start": 106.599,
+          "end": 106.72,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 106.72,
+          "end": 106.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "we",
+          "start": 106.739,
+          "end": 106.879,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 106.879,
+          "end": 106.879,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "find",
+          "start": 106.879,
+          "end": 107.179,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 107.179,
+          "end": 107.699,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "Slack",
+          "start": 107.699,
+          "end": 107.979,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 107.979,
+          "end": 108.0,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "helps",
+          "start": 108.0,
+          "end": 108.26,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 108.26,
+          "end": 108.299,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "us",
+          "start": 108.299,
+          "end": 108.459,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 108.459,
+          "end": 108.579,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "to",
+          "start": 108.579,
+          "end": 108.679,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 108.679,
+          "end": 108.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "do",
+          "start": 108.739,
+          "end": 108.9,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 108.9,
+          "end": 108.959,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "a",
+          "start": 108.959,
+          "end": 109.019,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 109.019,
+          "end": 109.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "lot",
+          "start": 109.059,
+          "end": 109.239,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 109.239,
+          "end": 109.239,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "of",
+          "start": 109.239,
+          "end": 109.359,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 109.359,
+          "end": 109.419,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "things",
+          "start": 109.419,
+          "end": 109.72,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 109.72,
+          "end": 109.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "with",
+          "start": 109.739,
+          "end": 109.94,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 109.94,
+          "end": 109.959,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "a",
+          "start": 109.959,
+          "end": 110.099,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 110.099,
+          "end": 110.139,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "really",
+          "start": 110.139,
+          "end": 110.379,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 110.379,
+          "end": 110.399,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "simple",
+          "start": 110.399,
+          "end": 110.68,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 110.68,
+          "end": 110.72,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "tool.",
+          "start": 110.72,
+          "end": 111.019,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 111.019,
+          "end": 111.919,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "So,",
+          "start": 111.919,
+          "end": 112.359,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 112.359,
+          "end": 112.799,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "uh,",
+          "start": 112.799,
+          "end": 113.04,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 113.04,
+          "end": 113.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "to",
+          "start": 113.119,
+          "end": 113.26,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 113.26,
+          "end": 113.319,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "start",
+          "start": 113.319,
+          "end": 113.68,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 113.68,
+          "end": 113.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "with,",
+          "start": 113.739,
+          "end": 114.1,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 114.1,
+          "end": 114.299,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "Slack",
+          "start": 114.299,
+          "end": 114.639,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 114.639,
+          "end": 114.68,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "focuses",
+          "start": 114.68,
+          "end": 115.459,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 115.459,
+          "end": 116.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "on",
+          "start": 116.059,
+          "end": 116.459,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 116.459,
+          "end": 117.459,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "using",
+          "start": 117.459,
+          "end": 117.86,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 117.86,
+          "end": 118.439,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "chat",
+          "start": 118.439,
+          "end": 118.919,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 118.919,
+          "end": 119.219,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "as",
+          "start": 119.219,
+          "end": 119.799,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 119.799,
+          "end": 119.899,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "the",
+          "start": 119.899,
+          "end": 119.979,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 119.979,
+          "end": 120.019,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "primary",
+          "start": 120.019,
+          "end": 120.519,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 120.519,
+          "end": 120.659,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "way",
+          "start": 120.659,
+          "end": 120.799,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 120.799,
+          "end": 120.799,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "of",
+          "start": 120.799,
+          "end": 120.879,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 120.879,
+          "end": 120.939,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "communication.",
+          "start": 120.939,
+          "end": 121.599,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 121.599,
+          "end": 121.759,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "So",
+          "start": 121.759,
+          "end": 121.879,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 121.879,
+          "end": 121.939,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "texting,",
+          "start": 121.939,
+          "end": 122.64,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 122.64,
+          "end": 123.18,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "uh,",
+          "start": 123.18,
+          "end": 123.719,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 123.719,
+          "end": 124.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "is",
+          "start": 124.059,
+          "end": 124.779,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 124.779,
+          "end": 124.799,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "how",
+          "start": 124.799,
+          "end": 124.939,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 124.939,
+          "end": 124.979,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "you",
+          "start": 124.979,
+          "end": 125.08,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 125.08,
+          "end": 125.099,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "could",
+          "start": 125.099,
+          "end": 125.239,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 125.239,
+          "end": 125.259,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "think",
+          "start": 125.259,
+          "end": 125.419,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 125.419,
+          "end": 125.459,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "about",
+          "start": 125.459,
+          "end": 125.72,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 125.72,
+          "end": 125.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "it.",
+          "start": 125.739,
+          "end": 125.979,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 125.979,
+          "end": 126.019,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "So",
+          "start": 126.019,
+          "end": 126.219,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 126.219,
+          "end": 126.299,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "not",
+          "start": 126.299,
+          "end": 126.499,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 126.499,
+          "end": 126.559,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "so",
+          "start": 126.559,
+          "end": 126.679,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 126.679,
+          "end": 126.739,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "different",
+          "start": 126.739,
+          "end": 127.059,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 127.059,
+          "end": 127.099,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "from",
+          "start": 127.099,
+          "end": 127.279,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 127.279,
+          "end": 127.319,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "WhatsApp",
+          "start": 127.319,
+          "end": 127.819,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 127.819,
+          "end": 128.319,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "but",
+          "start": 128.319,
+          "end": 128.679,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 128.679,
+          "end": 129.399,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "built",
+          "start": 129.399,
+          "end": 129.659,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 129.659,
+          "end": 129.759,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "for",
+          "start": 129.759,
+          "end": 130.019,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 130.019,
+          "end": 130.94,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "professional",
+          "start": 130.94,
+          "end": 131.36,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 131.36,
+          "end": 131.399,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "communication",
+          "start": 131.399,
+          "end": 132.099,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 132.099,
+          "end": 132.099,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "within",
+          "start": 132.099,
+          "end": 132.399,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 132.399,
+          "end": 132.44,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "your",
+          "start": 132.44,
+          "end": 132.539,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 132.539,
+          "end": 132.619,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "team,",
+          "start": 132.619,
+          "end": 132.879,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 132.879,
+          "end": 133.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "right?",
+          "start": 133.279,
+          "end": 133.6,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 133.6,
+          "end": 133.699,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "And",
+          "start": 133.699,
+          "end": 134.119,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 134.119,
+          "end": 134.779,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "so,",
+          "start": 134.779,
+          "end": 135.239,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 135.239,
+          "end": 135.239,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "uh,",
+          "start": 135.239,
+          "end": 135.639,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 135.639,
+          "end": 137.0,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        }
+      ]
+    },
+    {
+      "text": "I think to start with, what's really great about Slack is just ",
+      "words": [
+        {
+          "text": "I",
+          "start": 137.0,
+          "end": 137.08,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 137.08,
+          "end": 137.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "think",
+          "start": 137.119,
+          "end": 137.239,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 137.239,
+          "end": 137.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "to",
+          "start": 137.279,
+          "end": 137.4,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 137.4,
+          "end": 137.419,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "start",
+          "start": 137.419,
+          "end": 137.819,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 137.819,
+          "end": 137.819,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "with,",
+          "start": 137.819,
+          "end": 138.219,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 138.219,
+          "end": 138.379,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "what's",
+          "start": 138.379,
+          "end": 138.58,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 138.58,
+          "end": 138.619,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "really",
+          "start": 138.619,
+          "end": 138.82,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 138.82,
+          "end": 138.899,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "great",
+          "start": 138.899,
+          "end": 139.159,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 139.159,
+          "end": 139.199,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "about",
+          "start": 139.199,
+          "end": 139.52,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 139.52,
+          "end": 139.639,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "Slack",
+          "start": 139.639,
+          "end": 140.039,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 140.039,
+          "end": 140.08,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "is",
+          "start": 140.08,
+          "end": 140.239,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 140.239,
+          "end": 140.3,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "just",
+          "start": 140.3,
+          "end": 140.779,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 140.779,
+          "end": 141.959,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        }
+      ]
+    },
+    {
+      "text": "how easy it makes it to organize all your conversations, right? And it does this through a few simple, uh, tools that we put-",
+      "words": [
+        {
+          "text": "how",
+          "start": 141.959,
+          "end": 142.419,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 142.419,
+          "end": 142.459,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "easy",
+          "start": 142.459,
+          "end": 142.759,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 142.759,
+          "end": 142.779,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "it",
+          "start": 142.779,
+          "end": 142.94,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 142.94,
+          "end": 143.02,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "makes",
+          "start": 143.02,
+          "end": 143.319,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 143.319,
+          "end": 143.36,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "it",
+          "start": 143.36,
+          "end": 143.639,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 143.639,
+          "end": 143.94,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "to",
+          "start": 143.94,
+          "end": 144.239,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 144.239,
+          "end": 144.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "organize",
+          "start": 144.279,
+          "end": 144.739,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 144.739,
+          "end": 144.759,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "all",
+          "start": 144.759,
+          "end": 144.899,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 144.899,
+          "end": 144.919,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "your",
+          "start": 144.919,
+          "end": 145.04,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 145.04,
+          "end": 145.08,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "conversations,",
+          "start": 145.08,
+          "end": 145.939,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 145.939,
+          "end": 146.02,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "right?",
+          "start": 146.02,
+          "end": 146.219,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 146.219,
+          "end": 146.22,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "And",
+          "start": 146.22,
+          "end": 146.32,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 146.32,
+          "end": 146.36,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "it",
+          "start": 146.36,
+          "end": 146.479,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 146.479,
+          "end": 146.5,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "does",
+          "start": 146.5,
+          "end": 146.699,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 146.699,
+          "end": 146.779,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "this",
+          "start": 146.779,
+          "end": 146.959,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 146.959,
+          "end": 147.059,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "through",
+          "start": 147.059,
+          "end": 147.36,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 147.36,
+          "end": 147.36,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "a",
+          "start": 147.36,
+          "end": 147.5,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 147.5,
+          "end": 147.52,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "few",
+          "start": 147.52,
+          "end": 147.819,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 147.819,
+          "end": 147.839,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "simple,",
+          "start": 147.839,
+          "end": 148.32,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 148.32,
+          "end": 149.279,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "uh,",
+          "start": 149.279,
+          "end": 149.519,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 149.519,
+          "end": 149.679,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "tools",
+          "start": 149.679,
+          "end": 150.039,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 150.039,
+          "end": 150.119,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "that",
+          "start": 150.119,
+          "end": 150.5,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 150.5,
+          "end": 150.86,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "we",
+          "start": 150.86,
+          "end": 150.959,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": " ",
+          "start": 150.959,
+          "end": 150.979,
+          "type": "spacing",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        },
+        {
+          "text": "put-",
+          "start": 150.979,
+          "end": 151.02,
+          "type": "word",
+          "speaker_id": "Speaker 1",
+          "characters": null
+        }
+      ]
+    }
+  ]
+}

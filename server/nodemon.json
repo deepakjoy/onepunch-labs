@@ -1,0 +1,6 @@
+{
+  "watch": ["*.ts"],
+  "ext": "ts,json",
+  "ignore": ["*.test.ts"],
+  "exec": "node --inspect=0.0.0.0:9229 --trace-warnings -r ts-node/register ./index.ts"
+} 
