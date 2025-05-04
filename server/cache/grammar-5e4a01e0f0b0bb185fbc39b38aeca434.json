@@ -1,0 +1,112 @@
+[
+  {
+    "sentence": "Hey. Slack, I think would be, great for you guys if you, before we get into that, I wanted to understand what you're looking for.",
+    "errors": [
+      {
+        "text": "Slack, I think would be, great for you guys if you, before we get into that, I wanted to understand what you're looking for.",
+        "suggestion": "This sentence is broken; the thought shifts from recommending Slack to asking a question without completing either idea. The speaker should finish one idea before moving to the next.",
+        "category": "Broken sentences"
+      }
+    ]
+  },
+  {
+    "sentence": "Do you have anything in terms of a knowledge base or something that you can look up for information? now, it's kind of scattered.",
+    "errors": [
+      {
+        "text": "\"now, it's kind of scattered.\"",
+        "suggestion": "This abruptly changes topic without a clear transition from the previous question, making the message unclear.",
+        "category": "Unclear message"
+      }
+    ]
+  },
+  {
+    "sentence": "Slack helps us to do a lot of things with a really simple tool. to start with, Slack focuses on using chat as the primary way of communication. texting, is how you could think about it. not different from WhatsApp, but built for professional communication within your team, And I think to start with, what's really great about Slack is just how easy it makes it to organize all your conversations, And it does this through a few simple, tools that we provide that we found work really even for, you know, very large to very small teams.",
+    "errors": [
+      {
+        "text": "texting, is how you could think about it. not different from WhatsApp, but built for professional communication within your team,",
+        "suggestion": "This is a fragmented transition and doesn't clearly explain the distinction between WhatsApp and Slack for a listener.",
+        "category": "Unclear message"
+      }
+    ]
+  },
+  {
+    "sentence": "And, Slack really started out as a product-led company, And people picked up Slack because it helped small teams communicate really effectively, four or five member teams.",
+    "errors": [
+      {
+        "text": "product-led company",
+        "suggestion": "\"Product-led company\" might not be clear to all listeners; consider explaining that Slack’s growth was primarily from people using the product itself rather than sales.",
+        "category": "Incorrect vocabulary"
+      }
+    ]
+  },
+  {
+    "sentence": "primarily this works through one, of course, you can directly message people, but the other big thing is, channels where you can create channels for any, longer conversations, you can have short term channels that are for a particular project for a week or two.",
+    "errors": [
+      {
+        "text": "primarily this works through one, of course, you can directly message people, but the other big thing is, channels...",
+        "suggestion": "This sentence is broken and the structure is unclear. It starts with 'primarily this works through one', but doesn't finish the initial point before moving on.",
+        "category": "Broken sentences"
+      }
+    ]
+  },
+  {
+    "sentence": "It's only one in 10 times that a feature that they're working on is being, you know, discussed. what's... How Slack makes this easy is you can just tag somebody, if you know that this is the PM that's working on this feature as a salesperson, I can tag them, or somebody else can also do this in a thread below, once I put a message, somebody can...... who knows who might be the person to answer this query can just reply tagging them, and now that person gets a notification.",
+    "errors": [
+      {
+        "text": "what's... How Slack makes this easy is you can just tag somebody, if you know that this is the PM that's working on this feature as a salesperson, I can tag them, or somebody else can also do this in a thread below, once I put a message, somebody can...... who knows who might be the person to answer this query can just reply tagging them, and now that person gets a notification.",
+        "suggestion": "This is a very long, broken sentence with several incomplete or overlapping ideas and unclear reference points. Break into clear, separate thoughts.",
+        "category": "Broken sentences"
+      }
+    ]
+  },
+  {
+    "sentence": "And you know, your entire company is able to, in a way, massage this conversation to the stakeholders.",
+    "errors": [
+      {
+        "text": "\"massage this conversation to the stakeholders\"",
+        "suggestion": "\"Massage\" is an incorrect vocabulary choice here; \"direct\" or \"guide\" the conversation would be clearer.",
+        "category": "Incorrect vocabulary"
+      }
+    ]
+  },
+  {
+    "sentence": "Yeah. I'll tell you a few simple features that make this a lot easier, now when, when it comes to email, it's typically... especially when there are multiple people in a conversation, it could be 10, 20 even, sometimes even hundreds.",
+    "errors": [
+      {
+        "text": "now when, when it comes to email, it's typically... especially when there are multiple people in a conversation, it could be 10, 20 even, sometimes even hundreds.",
+        "suggestion": "This is a broken sentence; the transition between the ideas about email is unclear and gets lost.",
+        "category": "Broken sentences"
+      }
+    ]
+  },
+  {
+    "sentence": "Yeah, when it comes to time zones, again, it's a thing that, you know, we've also had to, grapple with, And one of the ways we do it is, people, of course, can set their notification times and, again, have different levels, where maybe you are okay with taking a notification even in the middle of the night in a certain channel which is critical, (sniffs) if you're specifically tagged, but maybe not if it's just a normal message, we give you all these controls to, you know, fine-tune these things, and, it, it is really quite easy to, get that going.",
+    "errors": [
+      {
+        "text": "it's a thing that, you know, we've also had to, grapple with, And one of the ways we do it is, people, of course, can set their notification times and, again, have different levels, where maybe you are okay with taking a notification even in the middle of the night in a certain channel which is critical, (sniffs) if you're specifically tagged, but maybe not if it's just a normal message, we give you all these controls to, you know, fine-tune these things, and, it, it is really quite easy to, get that going.",
+        "suggestion": "Extremely long and broken sentence; shifts topics and references awkwardly and is difficult to follow.",
+        "category": "Broken sentences"
+      }
+    ]
+  },
+  {
+    "sentence": "Yes, you have, all the usual, access control settings you would expect, where you can have private channels where only people who are specifically added can participate. You can also have channels that, are open for people to join in if they and, you know, join and, remove themselves as they wish.",
+    "errors": [
+      {
+        "text": "channels that, are open for people to join in if they and, you know, join and, remove themselves as they wish.",
+        "suggestion": "\"if they and, you know, join and...\" is a broken phrase and unclear in meaning. The message is lost here.",
+        "category": "Broken sentences"
+      }
+    ]
+  },
+  {
+    "sentence": "Perfect, I'll do that. you, you can expect an email from deepak@slack.com, within the hour with this information. and if you have any questions, feel free to reply back, and I'll be on away.",
+    "errors": [
+      {
+        "text": "\"I'll be on away\"",
+        "suggestion": "\"I'll be on away\" is incorrect vocabulary usage and is unclear. The intention might be to say \"I'll be available\" or \"I'll be on standby.\"",
+        "category": "Incorrect vocabulary"
+      }
+    ]
+  }
+]
