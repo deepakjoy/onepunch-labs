@@ -212,6 +212,14 @@ function getCategoryStyle(category: string) {
   }
 }
 
+// Helper to get segment color for new ranges
+function getFillerSegmentColor(segment: number) {
+  if (segment <= 3) return 'bg-green-400 border-green-500';
+  if (segment <= 6) return 'bg-yellow-400 border-yellow-500';
+  if (segment <= 9) return 'bg-orange-400 border-orange-500';
+  return 'bg-red-500 border-red-600';
+}
+
 export default function VoiceCoach() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
@@ -523,11 +531,73 @@ export default function VoiceCoach() {
                 <div className="mt-8 bg-white shadow rounded-lg p-6">
                   <h2 className="text-lg font-medium text-gray-900 mb-4">Filler Words Analysis</h2>
 
-                  {/* KPI Card for Total Filler Words */}
-                  <div className="flex flex-wrap gap-6 mb-6">
-                    <div className="flex-1 min-w-[180px] bg-indigo-50 rounded-lg p-6 flex flex-col items-center justify-center shadow">
-                      <span className="text-3xl font-bold text-indigo-700">{analysisResult.fillerWords.total}</span>
-                      <span className="text-sm text-indigo-900 mt-2">Total Filler Words</span>
+                  {/* KPI Cards and Filler Words per Minute Meter side by side */}
+                  <div className="flex flex-col md:flex-row gap-6 mb-6">
+                    {/* KPI Cards row (50%) */}
+                    <div className="w-full md:w-1/2 flex flex-row gap-4 justify-center items-center">
+                      {/* KPI Card for Total Filler Words */}
+                      <div className="bg-indigo-50 rounded-lg p-6 flex flex-col items-center justify-center shadow text-center w-1/2">
+                        <span className="text-4xl font-bold text-indigo-700">{analysisResult.fillerWords.total}</span>
+                        <span className="text-sm text-indigo-900 mt-2">Total Filler Words</span>
+                      </div>
+                      {/* KPI Card for Filler Words per Minute */}
+                      <div className="bg-indigo-50 rounded-lg p-6 flex flex-col items-center justify-center shadow text-center w-1/2">
+                        {(() => {
+                          const words = analysisResult.transcription.words;
+                          const first = words.find(w => typeof w.start === 'number');
+                          const last = [...words].reverse().find(w => typeof w.end === 'number');
+                          const audioLengthSec = first && last ? (last.end! - first.start!) : 0;
+                          const audioLengthMin = audioLengthSec / 60;
+                          const avgFillerWPM = audioLengthMin > 0 ? (analysisResult.fillerWords.total / audioLengthMin) : 0;
+                          return (
+                            <>
+                              <span className="text-4xl font-bold text-indigo-700">{avgFillerWPM.toFixed(2)}</span>
+                              <span className="text-sm text-indigo-900 mt-2">Filler Words/min</span>
+                            </>
+                          );
+                        })()}
+                      </div>
+                    </div>
+                    {/* Filler Words per Minute Meter (50%) */}
+                    <div className="w-full md:w-1/2 flex flex-col justify-center">
+                      {(() => {
+                        // Calculate audio length in seconds
+                        const words = analysisResult.transcription.words;
+                        const first = words.find(w => typeof w.start === 'number');
+                        const last = [...words].reverse().find(w => typeof w.end === 'number');
+                        const audioLengthSec = first && last ? (last.end! - first.start!) : 0;
+                        const audioLengthMin = audioLengthSec / 60;
+                        const avgFillerWPM = audioLengthMin > 0 ? (analysisResult.fillerWords.total / audioLengthMin) : 0;
+                        const maxSegments = 12;
+                        const cappedWPM = Math.min(avgFillerWPM, maxSegments);
+                        return (
+                          <div>
+                            <div className="flex items-center justify-between mb-1">
+                              <span className="text-sm font-medium text-gray-700">Filler Words per Minute</span>
+                              <span className="text-sm font-bold text-gray-900">{avgFillerWPM.toFixed(2)}</span>
+                            </div>
+                            <div className="flex gap-2 mb-2">
+                              {Array.from({ length: maxSegments }, (_, i) => {
+                                const segment = i + 1;
+                                const filled = cappedWPM >= segment;
+                                const color = getFillerSegmentColor(segment);
+                                return (
+                                  <div
+                                    key={segment}
+                                    className={`w-8 h-10 rounded-md border ${color} ${filled ? 'opacity-100' : 'opacity-10'}`}
+                                  ></div>
+                                );
+                              })}
+                            </div>
+                            <div className="flex w-full justify-between text-xs text-gray-500 mt-1 font-semibold">
+                              <span className="w-1/4 text-green-700 text-center">Great</span>
+                              <span className="w-1/4 text-yellow-700 text-center">OK</span>
+                              <span className="w-1/4 text-orange-700 text-center">Needs work</span>
+                              <span className="w-1/4 text-red-700 text-center">Umm...</span>
+                            </div>
+                          </div>
+                        );
+                      })()}
                     </div>
                   </div>
 
