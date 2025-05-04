@@ -1,5 +1,4 @@
 import express, { Request, Response, RequestHandler } from 'express';
-import { Express } from 'express';
 import cors from 'cors';
 import multer from 'multer';
 import dotenv from 'dotenv';
@@ -9,6 +8,7 @@ import { ElevenLabsClient } from 'elevenlabs';
 import crypto from 'crypto';
 import OpenAI from 'openai';
 import ffmpeg from 'fluent-ffmpeg';
+import { v4 as uuidv4 } from 'uuid';
 
 // Types for the transcription data
 interface Word {
@@ -362,8 +362,14 @@ async function checkGrammar(text: string, cacheKey: string): Promise<Array<{ sen
   }
 }
 
+// Minimal type for uploaded files
+interface UploadedFile {
+  path: string;
+  [key: string]: unknown;
+}
+
 // Function to concatenate audio files
-async function concatenateAudioFiles(files: Express.Multer.File[]): Promise<string> {
+async function concatenateAudioFiles(files: UploadedFile[]): Promise<string> {
   return new Promise((resolve, reject) => {
     const outputFile = path.join(UPLOADS_DIR, `combined-${Date.now()}.mp3`);
     const fileList = path.join(UPLOADS_DIR, `filelist-${Date.now()}.txt`);
@@ -393,6 +399,12 @@ async function concatenateAudioFiles(files: Express.Multer.File[]): Promise<stri
 // Serve merged audio files statically
 app.use('/merged-audio', express.static(UPLOADS_DIR));
 
+// Directory for storing reports
+const REPORTS_DIR = path.join(__dirname, 'reports');
+if (!fs.existsSync(REPORTS_DIR)) {
+  fs.mkdirSync(REPORTS_DIR, { recursive: true });
+}
+
 // Endpoint to process audio and get coaching feedback
 const analyzeVoiceHandler: RequestHandler = async (req, res) => {
   try {
@@ -401,25 +413,11 @@ const analyzeVoiceHandler: RequestHandler = async (req, res) => {
       return;
     }
 
-    const files = req.files as Express.Multer.File[];
-    console.log('Processing files:', files.map(f => ({
-      filename: f.originalname,
-      size: `${(f.size / 1024 / 1024).toFixed(2)}MB`,
-      mimetype: f.mimetype
-    })));
-
-    // Verify files exist and are readable
-    for (const file of files) {
-      if (!fs.existsSync(file.path)) {
-        throw new Error(`Uploaded file not found: ${file.path}`);
-      }
-    }
-
+    const files = req.files as unknown as UploadedFile[];
     // Concatenate audio files
     const combinedFile = await concatenateAudioFiles(files);
     const mergedFileName = path.basename(combinedFile);
     const mergedFileUrl = `/merged-audio/${mergedFileName}`;
-    console.log('Combined audio file created:', combinedFile);
 
     // Generate cache key from combined file
     const cacheKey = generateCacheKey(combinedFile);
@@ -477,6 +475,24 @@ const analyzeVoiceHandler: RequestHandler = async (req, res) => {
     // Check grammar
     const grammarAnalysis = await checkGrammar(textWithoutFillers, cacheKey);
 
+    // Generate a unique report ID
+    const reportId = uuidv4();
+    const reportData = {
+      transcription,
+      pacing: {
+        dataPoints: pacingData,
+        averageWPM: pacingData.reduce((sum: number, point: { wpm: number }) => sum + point.wpm, 0) / pacingData.length
+      },
+      fillerWords,
+      grammar: grammarAnalysis,
+      mergedAudioUrl: mergedFileUrl,
+      reportId
+    };
+    // Save report data to disk
+    fs.writeFileSync(path.join(REPORTS_DIR, `${reportId}.json`), JSON.stringify(reportData, null, 2));
+    // Copy merged audio to reports dir for persistent access
+    fs.copyFileSync(combinedFile, path.join(REPORTS_DIR, `${reportId}.mp3`));
+
     // Clean up the uploaded files
     for (const file of files) {
       fs.unlinkSync(file.path);
@@ -488,16 +504,10 @@ const analyzeVoiceHandler: RequestHandler = async (req, res) => {
       }
     }, 2 * 60 * 1000);
 
-    // Return the transcription and analysis data, plus merged audio URL
+    // Return the transcription and analysis data, plus merged audio URL and report URL
     res.json({
-      transcription: transcription,
-      pacing: {
-        dataPoints: pacingData,
-        averageWPM: pacingData.reduce((sum, point) => sum + point.wpm, 0) / pacingData.length
-      },
-      fillerWords: fillerWords,
-      grammar: grammarAnalysis,
-      mergedAudioUrl: mergedFileUrl
+      ...reportData,
+      reportUrl: `/hackathon?report=${reportId}`
     });
 
   } catch (error) {
@@ -507,6 +517,22 @@ const analyzeVoiceHandler: RequestHandler = async (req, res) => {
 };
 
 app.post('/api/analyze-voice', upload.array('audio'), analyzeVoiceHandler);
+
+// Endpoint to fetch a report by ID
+app.get('/api/report/:id', (req: Request, res: Response) => {
+  const reportId = req.params.id;
+  const reportPath = path.join(REPORTS_DIR, `${reportId}.json`);
+  if (!fs.existsSync(reportPath)) {
+    res.status(404).json({ error: 'Report not found' });
+  }
+  const reportData = JSON.parse(fs.readFileSync(reportPath, 'utf-8'));
+  // Update mergedAudioUrl to point to the persistent file
+  reportData.mergedAudioUrl = `/report-audio/${reportId}.mp3`;
+  res.json(reportData);
+});
+
+// Serve persistent report audio files
+app.use('/report-audio', express.static(REPORTS_DIR));
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello from Express!');
