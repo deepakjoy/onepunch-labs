@@ -632,12 +632,11 @@ export default function VoiceCoach() {
                         const audioLengthMin = audioLengthSec / 60;
                         const avgFillerWPM = audioLengthMin > 0 ? (analysisResult.fillerWords.total / audioLengthMin) : 0;
                         const maxSegments = 12;
-                        const cappedWPM = Math.min(avgFillerWPM, maxSegments);
+                        const cappedWPM = Math.min(Math.round(avgFillerWPM), maxSegments);
                         return (
                           <div>
                             <div className="flex items-center justify-between mb-1">
                               <span className="text-sm font-medium text-gray-700">Filler Words per Minute</span>
-                              <span className="text-sm font-bold text-gray-900">{avgFillerWPM.toFixed(2)}</span>
                             </div>
                             <div className="flex gap-2 mb-2">
                               {Array.from({ length: maxSegments }, (_, i) => {
