@@ -220,6 +220,68 @@ function getFillerSegmentColor(segment: number) {
   return 'bg-red-500 border-red-600';
 }
 
+// Gauge meter for speaking pace
+function PaceGauge({ value }: { value: number }) {
+  // Gauge settings
+  const min = 0;
+  const max = 300;
+  const slowMax = 110;
+  const convMax = 180;
+  // Helper to get arc path for a range (always draws a semicircle segment)
+  function describeArc(cx: number, cy: number, r: number, startAngle: number, endAngle: number) {
+    const start = polarToCartesian(cx, cy, r, endAngle);
+    const end = polarToCartesian(cx, cy, r, startAngle);
+    const largeArcFlag = endAngle - startAngle > 180 ? "1" : "0";
+    return [
+      "M", start.x, start.y,
+      "A", r, r, 0, largeArcFlag, 0, end.x, end.y
+    ].join(" ");
+  }
+  function polarToCartesian(cx: number, cy: number, r: number, angle: number) {
+    const rad = (angle - 90) * Math.PI / 180.0;
+    return {
+      x: cx + r * Math.cos(rad),
+      y: cy + r * Math.sin(rad)
+    };
+  }
+  // Map WPM to angle from -90 (left) to +90 (right)
+  const mapWPMToAngle = (wpm: number) => {
+    const clamped = Math.max(min, Math.min(wpm, max));
+    return ((clamped - min) / (max - min)) * 180 - 90;
+  };
+  // Arc segment angles (all in -90 to +90)
+  const slowStart = -90;
+  const slowEnd = mapWPMToAngle(slowMax);
+  const convEnd = mapWPMToAngle(convMax);
+  const fastEnd = 90;
+  // Needle
+  const needleAngle = mapWPMToAngle(value);
+
+  return (
+    <div className="flex flex-col items-center w-full" style={{ minHeight: 160 }}>
+      <svg width="260" height="140" viewBox="0 0 260 140">
+        {/* Slow (orange) */}
+        <path d={describeArc(130, 130, 100, slowStart, slowEnd)} fill="none" stroke="#fbbf24" strokeWidth="16" />
+        {/* Conversational (green) */}
+        <path d={describeArc(130, 130, 100, slowEnd, convEnd)} fill="none" stroke="#4ade80" strokeWidth="16" />
+        {/* Fast (red) */}
+        <path d={describeArc(130, 130, 100, convEnd, fastEnd)} fill="none" stroke="#f87171" strokeWidth="16" />
+        {/* Needle */}
+        <g transform={`rotate(${needleAngle} 130 130)`}>
+          <rect x="128" y="50" width="4" height="80" fill="#374151" rx="2" />
+        </g>
+        {/* Center circle */}
+        <circle cx="130" cy="130" r="10" fill="#374151" />
+      </svg>
+      <div className="flex w-full justify-between mt-2 text-base font-semibold">
+        <span className="text-orange-400">Slow</span>
+        <span className="text-green-700">Conversational</span>
+        <span className="text-red-400">Fast</span>
+      </div>
+    </div>
+  );
+}
+
 export default function VoiceCoach() {
   const [isAnalyzing, setIsAnalyzing] = useState(false);
   const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
@@ -490,11 +552,15 @@ export default function VoiceCoach() {
               {/* Speaking pace analysis section */}
               <div className="mt-8 bg-white shadow rounded-lg p-6">
                 <h2 className="text-lg font-medium text-gray-900 mb-4">Speaking Pace Analysis</h2>
-                {/* Average Speaking Rate KPI Card */}
-                <div className="flex flex-wrap gap-6 mb-6">
-                  <div className="flex-1 min-w-[180px] bg-green-50 rounded-lg p-6 flex flex-col items-center justify-center shadow">
-                    <span className="text-3xl font-bold text-green-700">{Math.round(analysisResult.pacing.averageWPM)}</span>
-                    <span className="text-sm text-green-900 mt-2">Average Speaking Rate (WPM)</span>
+                <div className="mb-6 flex flex-col md:flex-row gap-6 items-stretch justify-center">
+                  {/* WPM KPI Card (left, 50%) */}
+                  <div className="bg-indigo-50 rounded-lg p-6 flex flex-col items-center justify-center shadow text-center w-full md:w-1/2 h-full min-h-[220px]">
+                    <span className="text-4xl font-bold text-indigo-700">{Math.round(analysisResult.pacing.averageWPM)}</span>
+                    <span className="text-sm text-indigo-900 mt-2">Words per Minute</span>
+                  </div>
+                  {/* Pace Gauge Meter (right, 50%) */}
+                  <div className="bg-indigo-50 rounded-lg p-6 flex flex-col items-center justify-center shadow text-center w-full md:w-1/2 h-full min-h-[220px]">
+                    <PaceGauge value={Math.round(analysisResult.pacing.averageWPM)} />
                   </div>
                 </div>
                 <div className="h-64">
@@ -521,9 +587,6 @@ export default function VoiceCoach() {
                     options={chartOptions}
                   />
                 </div>
-                <p className="mt-4 text-sm text-gray-600">
-                  Average speaking rate: {Math.round(analysisResult.pacing.averageWPM)} words per minute
-                </p>
               </div>
 
               {/* Filler words analysis section */}
