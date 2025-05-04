@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { MicrophoneIcon, ArrowPathIcon } from '@heroicons/react/24/outline';
+import { ArrowPathIcon } from '@heroicons/react/24/outline';
 import {
   Chart as ChartJS,
   CategoryScale,
@@ -61,6 +61,12 @@ interface AnalysisResult {
       category: string;
     }>;
   }>;
+  mergedAudioUrl?: string;
+}
+
+interface SelectedFile {
+  name: string;
+  size: number;
 }
 
 // Helper function to clean word text by removing punctuation and converting to lowercase
@@ -205,21 +211,35 @@ function getCategoryStyle(category: string) {
 }
 
 export default function VoiceCoach() {
-  const [audioFile, setAudioFile] = useState<File | null>(null);
-  const [audioUrl, setAudioUrl] = useState<string | null>(null);
   const [isAnalyzing, setIsAnalyzing] = useState(false);
-  const [result, setResult] = useState<AnalysisResult | null>(null);
-  const [showTranscript, setShowTranscript] = useState(false);
+  const [analysisResult, setAnalysisResult] = useState<AnalysisResult | null>(null);
+  const [audioUrl, setAudioUrl] = useState<string | null>(null);
+  const [selectedFiles, setSelectedFiles] = useState<SelectedFile[]>([]);
+  const [mergedAudioUrl, setMergedAudioUrl] = useState<string | null>(null);
+  const [showRawTranscript, setShowRawTranscript] = useState(false);
   const [showHighlightedTranscript, setShowHighlightedTranscript] = useState(false);
-  const [showGrammar, setShowGrammar] = useState(true);
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files[0]) {
-      const file = e.target.files[0];
-      setAudioFile(file);
-      // Create URL for the audio file
-      const url = URL.createObjectURL(file);
-      setAudioUrl(url);
+    const files = e.target.files;
+    if (files && files.length > 0) {
+      const newFiles = Array.from(files).map(file => ({
+        name: file.name,
+        size: file.size
+      }));
+      setSelectedFiles(newFiles);
+      
+      // Create object URL for the first file to play
+      const firstFile = files[0];
+      if (firstFile) {
+        const url = URL.createObjectURL(firstFile);
+        setAudioUrl(url);
+      }
+    } else {
+      setSelectedFiles([]);
+      if (audioUrl) {
+        URL.revokeObjectURL(audioUrl);
+        setAudioUrl(null);
+      }
     }
   };
 
@@ -234,11 +254,16 @@ export default function VoiceCoach() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!audioFile) return;
+    if (selectedFiles.length === 0) return;
 
     setIsAnalyzing(true);
     const formData = new FormData();
-    formData.append('audio', audioFile);
+    const fileInput = document.querySelector('input[type="file"]') as HTMLInputElement;
+    if (fileInput.files) {
+      Array.from(fileInput.files).forEach(file => {
+        formData.append('audio', file);
+      });
+    }
 
     try {
       const response = await fetch('http://localhost:3001/api/analyze-voice', {
@@ -246,7 +271,10 @@ export default function VoiceCoach() {
         body: formData,
       });
       const data = await response.json();
-      setResult(data);
+      setAnalysisResult(data);
+      if (data.mergedAudioUrl) {
+        setMergedAudioUrl(`http://localhost:3001${data.mergedAudioUrl}`);
+      }
     } catch (error) {
       console.error('Error analyzing voice:', error);
     } finally {
@@ -324,223 +352,239 @@ export default function VoiceCoach() {
   };
 
   return (
-    <div className="px-4 sm:px-6 lg:px-8">
-      <div className="sm:flex sm:items-center">
-        <div className="sm:flex-auto">
-          <h1 className="text-base font-semibold leading-6 text-gray-900">Voice Coach</h1>
-          <p className="mt-2 text-sm text-gray-700">
-            Upload an audio file to analyze your speaking patterns.
-          </p>
-        </div>
-      </div>
-
-      <form onSubmit={handleSubmit} className="mt-8">
-        <div className="mt-1 flex justify-center px-6 pt-5 pb-6 border-2 border-gray-300 border-dashed rounded-md">
-          <div className="space-y-1 text-center">
-            <MicrophoneIcon className="mx-auto h-12 w-12 text-gray-400" />
-            <div className="flex justify-center text-sm text-gray-600">
-              <label
-                htmlFor="audio-upload"
-                className="relative cursor-pointer rounded-md font-medium text-indigo-600 hover:text-indigo-500 focus-within:outline-none focus-within:ring-2 focus-within:ring-offset-2 focus-within:ring-indigo-500"
-              >
-                <span>Upload a file</span>
-                <input
-                  id="audio-upload"
-                  name="audio"
-                  type="file"
-                  className="sr-only"
+    <div className="min-h-screen bg-gray-50 py-8 w-full">
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 w-full">
+        <div className="text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-8">Voice Coach</h1>
+          
+          <div className="mx-auto w-full">
+            <div className="flex justify-center">
+              <label className="w-full flex flex-col items-center px-4 py-6 bg-white rounded-lg shadow-lg tracking-wide border border-blue-500 cursor-pointer hover:bg-blue-50">
+                <svg className="w-8 h-8 text-blue-500" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
+                  <path d="M16.88 9.1A4 4 0 0 1 16 17H5a5 5 0 0 1-1-9.9V7a3 3 0 0 1 4.52-2.59A4.98 4.98 0 0 1 17 8c0 .38-.04.74-.12 1.1zM11 11h3l-4-4-4 4h3v3h2v-3z" />
+                </svg>
+                <span className="mt-2 text-base leading-normal">Select audio files</span>
+                <input 
+                  type="file" 
+                  className="hidden" 
                   accept="audio/*"
+                  multiple
                   onChange={handleFileChange}
                 />
+                <p className="mt-2 text-xs text-gray-500">MP3, WAV, M4A, OGG, or WEBM up to 1GB</p>
               </label>
-              <p className="pl-1">or drag and drop</p>
             </div>
-            <p className="text-xs text-gray-500">MP3, WAV, M4A, OGG, or WEBM up to 10MB</p>
-            {audioFile && (
-              <p className="mt-2 text-sm text-gray-500">
-                Selected file: {audioFile.name}
-              </p>
-            )}
-          </div>
-        </div>
 
-        <div className="mt-4 flex justify-end">
-          <button
-            type="submit"
-            disabled={!audioFile || isAnalyzing}
-            className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
-          >
-            {isAnalyzing ? (
-              <>
-                <ArrowPathIcon className="mr-2 h-4 w-4 animate-spin" />
-                Analyzing...
-              </>
-            ) : (
-              'Analyze Voice'
-            )}
-          </button>
-        </div>
-      </form>
-
-      {result && (
-        <div className="mt-8">
-          {/* Audio player section */}
-          {audioUrl && (
-            <div className="mb-8 bg-white shadow rounded-lg p-6">
-              <h2 className="text-lg font-medium text-gray-900 mb-4">Audio Playback</h2>
-              <div className="flex items-center space-x-4">
-                <audio
-                  controls
-                  className="w-full"
-                  src={audioUrl}
-                >
-                  Your browser does not support the audio element.
-                </audio>
-              </div>
-            </div>
-          )}
-
-          {/* Main transcription section */}
-          <div className="bg-white shadow rounded-lg p-6">
-            <div className="flex justify-between items-center mb-4">
-              <h2 className="text-lg font-medium text-gray-900">Transcription</h2>
-              <button
-                onClick={() => setShowTranscript(!showTranscript)}
-                className="text-sm text-indigo-600 hover:text-indigo-500"
-              >
-                {showTranscript ? 'Hide Transcript' : 'Show Transcript'}
-              </button>
-            </div>
-            {showTranscript && (
+            {selectedFiles.length > 0 && (
               <div className="mt-4">
-                <RawTranscript words={result.transcription.words} />
+                <h3 className="text-sm font-medium text-gray-700 mb-2">Selected Files:</h3>
+                <ul className="space-y-2">
+                  {selectedFiles.map((file, index) => (
+                    <li key={index} className="flex items-center justify-between bg-white p-2 rounded-md shadow">
+                      <span className="text-sm text-gray-600">{file.name}</span>
+                      <span className="text-xs text-gray-500">
+                        {(file.size / (1024 * 1024)).toFixed(2)} MB
+                      </span>
+                    </li>
+                  ))}
+                </ul>
               </div>
             )}
-          </div>
 
-          {/* Speaking pace analysis section */}
-          <div className="mt-8 bg-white shadow rounded-lg p-6">
-            <h2 className="text-lg font-medium text-gray-900 mb-4">Speaking Pace Analysis</h2>
-            <div className="h-64">
-              <Line
-                data={{
-                  labels: result.pacing.dataPoints.map(point => `${Math.round(point.time)}s`),
-                  datasets: [
-                    {
-                      label: 'Words per Minute',
-                      data: result.pacing.dataPoints.map(point => point.wpm),
-                      borderColor: 'rgb(79, 70, 229)',
-                      backgroundColor: 'rgba(79, 70, 229, 0.5)',
-                      tension: 0.1,
-                    },
-                    {
-                      label: 'Average WPM',
-                      data: Array(result.pacing.dataPoints.length).fill(result.pacing.averageWPM),
-                      borderColor: 'rgb(156, 163, 175)',
-                      borderDash: [5, 5],
-                      borderWidth: 1,
-                    },
-                  ],
-                }}
-                options={chartOptions}
-              />
-            </div>
-            <p className="mt-4 text-sm text-gray-600">
-              Average speaking rate: {Math.round(result.pacing.averageWPM)} words per minute
-            </p>
-          </div>
-
-          {/* Filler words analysis section */}
-          {result.fillerWords && (
-            <div className="mt-8 bg-white shadow rounded-lg p-6">
-              <h2 className="text-lg font-medium text-gray-900 mb-4">Filler Words Analysis</h2>
-              <div className="space-y-4">
-                {/* Filler word statistics */}
-                <div className="text-sm text-gray-600">
-                  <p>Total filler words: {result.fillerWords.total}</p>
-                  {result.fillerWords.breakdown.length > 0 && (
-                    <div className="mt-2">
-                      <p>Breakdown:</p>
-                      <ul className="list-disc list-inside">
-                        {result.fillerWords.breakdown.map((item, index) => (
-                          <li key={index}>
-                            "{item.word}" ({item.count})
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-                {/* Transcript with filler words highlighted */}
-                <div>
-                  <div className="flex justify-between items-center mb-2">
-                    <h3 className="text-sm font-medium text-gray-900">Transcript with Filler Words Highlighted</h3>
-                    <button
-                      onClick={() => setShowHighlightedTranscript(!showHighlightedTranscript)}
-                      className="text-sm text-indigo-600 hover:text-indigo-500"
-                    >
-                      {showHighlightedTranscript ? 'Hide Transcript' : 'Show Transcript'}
-                    </button>
-                  </div>
-                  {showHighlightedTranscript && (
-                    <div className="mt-2">
-                      <WordDisplay words={result.transcription.words} />
-                    </div>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Grammar analysis section */}
-          {result.grammar && result.grammar.length > 0 && (
-            <div className="mt-8 bg-white shadow rounded-lg p-6">
-              <div className="flex justify-between items-center mb-4">
-                <h2 className="text-lg font-medium text-gray-900">Content and Clarity Analysis</h2>
+            <form onSubmit={handleSubmit} className="mt-8">
+              <div className="mt-4 flex justify-end">
                 <button
-                  onClick={() => setShowGrammar(!showGrammar)}
-                  className="text-sm text-indigo-600 hover:text-indigo-500"
+                  type="submit"
+                  disabled={selectedFiles.length === 0 || isAnalyzing}
+                  className="inline-flex items-center rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-indigo-600 disabled:opacity-50"
                 >
-                  {showGrammar ? 'Hide Analysis' : 'Show Analysis'}
+                  {isAnalyzing ? (
+                    <>
+                      <ArrowPathIcon className="mr-2 h-4 w-4 animate-spin" />
+                      Analyzing...
+                    </>
+                  ) : (
+                    'Analyze Voice'
+                  )}
                 </button>
               </div>
-              {showGrammar && (
-                <div className="mt-4 space-y-6">
-                  {result.grammar.map((item, index) => (
-                    <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
-                      <p className="text-gray-900 mb-2">{item.sentence}</p>
-                      {item.errors.length > 0 ? (
-                        <div className="space-y-2">
-                          {item.errors.map((error, errorIndex) => {
-                            const style = getCategoryStyle(error.category);
-                            return (
-                              <div key={errorIndex} className={`${style.bg} p-3 rounded-md`}>
-                                <div className="flex items-start justify-between">
-                                  <p className={`${style.text} font-medium`}>
-                                    <span className={`${style.highlight} px-1 rounded`}>{error.text}</span>
-                                  </p>
-                                  <span className={`text-xs ${style.badge} px-2 py-1 rounded-full`}>
-                                    {error.category}
-                                  </span>
-                                </div>
-                                <p className={`${style.text} text-sm mt-1`}>
-                                  Suggestion: {error.suggestion}
-                                </p>
-                              </div>
-                            );
-                          })}
+            </form>
+
+            {analysisResult && (
+              <div className="mt-8">
+                {/* Audio player section */}
+                {mergedAudioUrl && (
+                  <div className="mb-8 bg-white shadow rounded-lg p-6">
+                    <h2 className="text-lg font-medium text-gray-900 mb-4">Audio Playback</h2>
+                    <div className="flex items-center space-x-4">
+                      <audio
+                        controls
+                        className="w-full"
+                        src={mergedAudioUrl}
+                      >
+                        Your browser does not support the audio element.
+                      </audio>
+                      <a
+                        href={mergedAudioUrl}
+                        download
+                        className="ml-2 px-3 py-1 bg-blue-100 text-blue-800 rounded text-xs font-medium hover:bg-blue-200"
+                      >
+                        Download Merged Audio
+                      </a>
+                    </div>
+                  </div>
+                )}
+
+                {/* Main transcription section (collapsible) */}
+                <div className="bg-white shadow rounded-lg p-6">
+                  <div className="flex justify-between items-center mb-4">
+                    <h2 className="text-lg font-medium text-gray-900">Transcription</h2>
+                    <button
+                      onClick={() => setShowRawTranscript(v => !v)}
+                      className="text-sm text-indigo-600 hover:text-indigo-500"
+                    >
+                      {showRawTranscript ? 'Hide' : 'Show'} Transcript
+                    </button>
+                  </div>
+                  {showRawTranscript && (
+                    <div className="mt-4">
+                      <RawTranscript words={analysisResult.transcription.words} />
+                    </div>
+                  )}
+                </div>
+
+                {/* Speaking pace analysis section */}
+                <div className="mt-8 bg-white shadow rounded-lg p-6">
+                  <h2 className="text-lg font-medium text-gray-900 mb-4">Speaking Pace Analysis</h2>
+                  {/* Average Speaking Rate KPI Card */}
+                  <div className="flex flex-wrap gap-6 mb-6">
+                    <div className="flex-1 min-w-[180px] bg-green-50 rounded-lg p-6 flex flex-col items-center justify-center shadow">
+                      <span className="text-3xl font-bold text-green-700">{Math.round(analysisResult.pacing.averageWPM)}</span>
+                      <span className="text-sm text-green-900 mt-2">Average Speaking Rate (WPM)</span>
+                    </div>
+                  </div>
+                  <div className="h-64">
+                    <Line
+                      data={{
+                        labels: analysisResult.pacing.dataPoints.map(point => `${Math.round(point.time)}s`),
+                        datasets: [
+                          {
+                            label: 'Words per Minute',
+                            data: analysisResult.pacing.dataPoints.map(point => point.wpm),
+                            borderColor: 'rgb(79, 70, 229)',
+                            backgroundColor: 'rgba(79, 70, 229, 0.5)',
+                            tension: 0.1,
+                          },
+                          {
+                            label: 'Average WPM',
+                            data: Array(analysisResult.pacing.dataPoints.length).fill(analysisResult.pacing.averageWPM),
+                            borderColor: 'rgb(156, 163, 175)',
+                            borderDash: [5, 5],
+                            borderWidth: 1,
+                          },
+                        ],
+                      }}
+                      options={chartOptions}
+                    />
+                  </div>
+                  <p className="mt-4 text-sm text-gray-600">
+                    Average speaking rate: {Math.round(analysisResult.pacing.averageWPM)} words per minute
+                  </p>
+                </div>
+
+                {/* Filler words analysis section */}
+                {analysisResult.fillerWords && (
+                  <div className="mt-8 bg-white shadow rounded-lg p-6">
+                    <h2 className="text-lg font-medium text-gray-900 mb-4">Filler Words Analysis</h2>
+
+                    {/* KPI Card for Total Filler Words */}
+                    <div className="flex flex-wrap gap-6 mb-6">
+                      <div className="flex-1 min-w-[180px] bg-indigo-50 rounded-lg p-6 flex flex-col items-center justify-center shadow">
+                        <span className="text-3xl font-bold text-indigo-700">{analysisResult.fillerWords.total}</span>
+                        <span className="text-sm text-indigo-900 mt-2">Total Filler Words</span>
+                      </div>
+                    </div>
+
+                    {/* Filler word statistics as pills */}
+                    <div className="text-sm text-gray-600 mb-4">
+                      {analysisResult.fillerWords.breakdown.length > 0 && (
+                        <div className="flex flex-wrap gap-2 items-center">
+                          {analysisResult.fillerWords.breakdown.map((item, index) => (
+                            <span
+                              key={index}
+                              className="inline-flex items-center bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm font-medium shadow-sm"
+                            >
+                              {item.word} <span className="ml-1 text-xs text-blue-600">({item.count})</span>
+                            </span>
+                          ))}
                         </div>
-                      ) : (
-                        <p className="text-green-600 text-sm">✓ No grammatical errors found</p>
                       )}
                     </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          )}
+
+                    {/* Transcript with filler words highlighted (collapsible) */}
+                    <div>
+                      <div className="flex justify-between items-center mb-2">
+                        <h3 className="text-sm font-medium text-gray-900">Transcript with Filler Words Highlighted</h3>
+                        <button
+                          onClick={() => setShowHighlightedTranscript(v => !v)}
+                          className="text-sm text-indigo-600 hover:text-indigo-500"
+                        >
+                          {showHighlightedTranscript ? 'Hide' : 'Show'} Transcript
+                        </button>
+                      </div>
+                      {showHighlightedTranscript && (
+                        <div className="mt-2">
+                          <WordDisplay words={analysisResult.transcription.words} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
+                {/* Grammar analysis section */}
+                {analysisResult.grammar && analysisResult.grammar.length > 0 && (
+                  <div className="mt-8 bg-white shadow rounded-lg p-6">
+                    <div className="flex justify-between items-center mb-4">
+                      <h2 className="text-lg font-medium text-gray-900">Content and Clarity Analysis</h2>
+                    </div>
+                    <div className="mt-4 space-y-6">
+                      {analysisResult.grammar.map((item, index) => (
+                        <div key={index} className="border-b border-gray-200 pb-4 last:border-b-0">
+                          <p className="text-gray-900 mb-2">{item.sentence}</p>
+                          {item.errors.length > 0 ? (
+                            <div className="space-y-2">
+                              {item.errors.map((error, errorIndex) => {
+                                const style = getCategoryStyle(error.category);
+                                return (
+                                  <div key={errorIndex} className={`${style.bg} p-3 rounded-md`}>
+                                    <div className="flex items-start justify-between">
+                                      <p className={`${style.text} font-medium`}>
+                                        <span className={`${style.highlight} px-1 rounded`}>{error.text}</span>
+                                      </p>
+                                      <span className={`text-xs ${style.badge} px-2 py-1 rounded-full`}>
+                                        {error.category}
+                                      </span>
+                                    </div>
+                                    <p className={`${style.text} text-sm mt-1`}>
+                                      Suggestion: {error.suggestion}
+                                    </p>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          ) : (
+                            <p className="text-green-600 text-sm">✓ No grammatical errors found</p>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
         </div>
-      )}
+      </div>
     </div>
   );
 } 

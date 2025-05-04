@@ -1,4 +1,5 @@
 import express, { Request, Response, RequestHandler } from 'express';
+import { Express } from 'express';
 import cors from 'cors';
 import multer from 'multer';
 import dotenv from 'dotenv';
@@ -7,6 +8,7 @@ import path from 'path';
 import { ElevenLabsClient } from 'elevenlabs';
 import crypto from 'crypto';
 import OpenAI from 'openai';
+import ffmpeg from 'fluent-ffmpeg';
 
 // Types for the transcription data
 interface Word {
@@ -202,9 +204,15 @@ console.log('ElevenLabs API Key:', process.env.ELEVENLABS_API_KEY ? 'Present' : 
 const app = express();
 const port = 3001;
 
+// Ensure uploads directory exists
+const UPLOADS_DIR = path.join(__dirname, 'uploads');
+if (!fs.existsSync(UPLOADS_DIR)) {
+  fs.mkdirSync(UPLOADS_DIR, { recursive: true });
+}
+
 // Configure multer for audio files
 const storage = multer.diskStorage({
-  destination: 'uploads/',
+  destination: UPLOADS_DIR,
   filename: (req, file, cb) => {
     const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
     cb(null, uniqueSuffix + path.extname(file.originalname));
@@ -222,7 +230,7 @@ const upload = multer({
     }
   },
   limits: {
-    fileSize: 10 * 1024 * 1024, // 10MB limit
+    fileSize: 1024 * 1024 * 1024, // 1GB limit
   }
 });
 
@@ -354,27 +362,67 @@ async function checkGrammar(text: string, cacheKey: string): Promise<Array<{ sen
   }
 }
 
+// Function to concatenate audio files
+async function concatenateAudioFiles(files: Express.Multer.File[]): Promise<string> {
+  return new Promise((resolve, reject) => {
+    const outputFile = path.join(UPLOADS_DIR, `combined-${Date.now()}.mp3`);
+    const fileList = path.join(UPLOADS_DIR, `filelist-${Date.now()}.txt`);
+    
+    // Create a file list for ffmpeg
+    const fileListContent = files.map(file => `file '${file.path}'`).join('\n');
+    fs.writeFileSync(fileList, fileListContent);
+
+    ffmpeg()
+      .input(fileList)
+      .inputOptions(['-f concat', '-safe 0'])
+      .output(outputFile)
+      .on('end', () => {
+        // Clean up the file list
+        fs.unlinkSync(fileList);
+        resolve(outputFile);
+      })
+      .on('error', (err: Error) => {
+        // Clean up the file list
+        fs.unlinkSync(fileList);
+        reject(err);
+      })
+      .run();
+  });
+}
+
+// Serve merged audio files statically
+app.use('/merged-audio', express.static(UPLOADS_DIR));
+
 // Endpoint to process audio and get coaching feedback
 const analyzeVoiceHandler: RequestHandler = async (req, res) => {
   try {
-    if (!req.file) {
-      res.status(400).json({ error: 'No audio file uploaded' });
+    if (!req.files || !Array.isArray(req.files) || req.files.length === 0) {
+      res.status(400).json({ error: 'No audio files uploaded' });
       return;
     }
 
-    console.log('Processing file:', {
-      filename: req.file.originalname,
-      size: `${(req.file.size / 1024 / 1024).toFixed(2)}MB`,
-      mimetype: req.file.mimetype
-    });
+    const files = req.files as Express.Multer.File[];
+    console.log('Processing files:', files.map(f => ({
+      filename: f.originalname,
+      size: `${(f.size / 1024 / 1024).toFixed(2)}MB`,
+      mimetype: f.mimetype
+    })));
 
-    // Verify file exists and is readable
-    if (!fs.existsSync(req.file.path)) {
-      throw new Error('Uploaded file not found');
+    // Verify files exist and are readable
+    for (const file of files) {
+      if (!fs.existsSync(file.path)) {
+        throw new Error(`Uploaded file not found: ${file.path}`);
+      }
     }
 
-    // Generate cache key from file content
-    const cacheKey = generateCacheKey(req.file.path);
+    // Concatenate audio files
+    const combinedFile = await concatenateAudioFiles(files);
+    const mergedFileName = path.basename(combinedFile);
+    const mergedFileUrl = `/merged-audio/${mergedFileName}`;
+    console.log('Combined audio file created:', combinedFile);
+
+    // Generate cache key from combined file
+    const cacheKey = generateCacheKey(combinedFile);
     let transcription;
 
     // Try to get cached response first
@@ -385,7 +433,7 @@ const analyzeVoiceHandler: RequestHandler = async (req, res) => {
     } else {
       console.log('No cache found, requesting transcription from ElevenLabs API');
       // Step 1: Transcribe audio with ElevenLabs Scribe
-      const audioData = fs.createReadStream(req.file.path);
+      const audioData = fs.createReadStream(combinedFile);
       try {
         transcription = await elevenLabs.speechToText.convert({
           file: audioData,
@@ -423,16 +471,24 @@ const analyzeVoiceHandler: RequestHandler = async (req, res) => {
       .filter(word => !FILLER_WORDS.has(cleanWord(word.text)))
       .map(word => word.text)
       .join(' ')
-      .replace(/\s+/g, ' ') // Replace multiple spaces with a single space
-      .trim(); // Remove leading/trailing spaces
+      .replace(/\s+/g, ' ')
+      .trim();
 
     // Check grammar
     const grammarAnalysis = await checkGrammar(textWithoutFillers, cacheKey);
 
-    // Clean up the uploaded file
-    fs.unlinkSync(req.file.path);
+    // Clean up the uploaded files
+    for (const file of files) {
+      fs.unlinkSync(file.path);
+    }
+    // Schedule deletion of merged file after 2 minutes
+    setTimeout(() => {
+      if (fs.existsSync(combinedFile)) {
+        fs.unlinkSync(combinedFile);
+      }
+    }, 2 * 60 * 1000);
 
-    // Return the transcription and analysis data
+    // Return the transcription and analysis data, plus merged audio URL
     res.json({
       transcription: transcription,
       pacing: {
@@ -440,16 +496,17 @@ const analyzeVoiceHandler: RequestHandler = async (req, res) => {
         averageWPM: pacingData.reduce((sum, point) => sum + point.wpm, 0) / pacingData.length
       },
       fillerWords: fillerWords,
-      grammar: grammarAnalysis
+      grammar: grammarAnalysis,
+      mergedAudioUrl: mergedFileUrl
     });
 
   } catch (error) {
     console.error('Error processing audio:', error);
-    res.status(500).json({ error: 'Error processing audio file' });
+    res.status(500).json({ error: 'Error processing audio files' });
   }
 };
 
-app.post('/api/analyze-voice', upload.single('audio'), analyzeVoiceHandler);
+app.post('/api/analyze-voice', upload.array('audio'), analyzeVoiceHandler);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello from Express!');
