@@ -330,7 +330,7 @@ export default function VoiceCoach() {
 
   useEffect(() => {
     if (reportId) {
-      fetch(`http://localhost:3001/api/report/${reportId}`)
+      fetch(`http://localhost:3001/api/voicecoach/report/${reportId}`)
         .then(res => res.json())
         .then(data => {
           setAnalysisResult(data);
@@ -355,7 +355,7 @@ export default function VoiceCoach() {
     }
 
     try {
-      const response = await fetch('http://localhost:3001/api/analyze-voice', {
+      const response = await fetch('http://localhost:3001/api/voicecoach/analyze-voice', {
         method: 'POST',
         body: formData,
       });
