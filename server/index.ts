@@ -9,6 +9,8 @@ import crypto from 'crypto';
 import OpenAI from 'openai';
 import ffmpeg from 'fluent-ffmpeg';
 import { v4 as uuidv4 } from 'uuid';
+import { setTimeout } from 'timers';
+import fishtankRouter from './fishtank';
 
 // Types for the transcription data
 interface Word {
@@ -533,6 +535,9 @@ app.get('/api/report/:id', (req: Request, res: Response) => {
 
 // Serve persistent report audio files
 app.use('/report-audio', express.static(REPORTS_DIR));
+
+console.log('Mounting fishtank router at /api/fishtank');
+app.use('/api/fishtank', fishtankRouter);
 
 app.get('/', (req: Request, res: Response) => {
   res.send('Hello from Express!');

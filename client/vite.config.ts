@@ -8,5 +8,13 @@ export default defineConfig({
     alias: {
       '@components': '/src/components'
     }
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3001', // Your Express server port
+        changeOrigin: true,
+      },
+    },
   }
 });
