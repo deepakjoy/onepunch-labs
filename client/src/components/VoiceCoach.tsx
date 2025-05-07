@@ -335,7 +335,10 @@ export default function VoiceCoach() {
         .then(data => {
           setAnalysisResult(data);
           if (data.mergedAudioUrl) {
-            setMergedAudioUrl(`http://localhost:3001${data.mergedAudioUrl}`);
+            console.log('Server returned mergedAudioUrl:', data.mergedAudioUrl);
+            const fullUrl = `http://localhost:3001${data.mergedAudioUrl}`;
+            console.log('Using full audio URL:', fullUrl);
+            setMergedAudioUrl(fullUrl);
           }
         });
     }
@@ -362,7 +365,10 @@ export default function VoiceCoach() {
       const data = await response.json();
       setAnalysisResult(data);
       if (data.mergedAudioUrl) {
-        setMergedAudioUrl(`http://localhost:3001${data.mergedAudioUrl}`);
+        console.log('Server returned mergedAudioUrl:', data.mergedAudioUrl);
+        const fullUrl = `http://localhost:3001${data.mergedAudioUrl}`;
+        console.log('Using full audio URL:', fullUrl);  
+        setMergedAudioUrl(fullUrl);
       }
       if (data.reportUrl) {
         navigate(data.reportUrl, { replace: true });
