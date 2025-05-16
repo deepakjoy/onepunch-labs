@@ -1,36 +1,51 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { JudgesTable } from './JudgesTable';
+import './FishTank.css';
 
 interface Dialogue {
-  speaker: 'judge' | 'user';
+  speaker: 'judge' | 'user' | 'ai_entrepreneur';
   text: string;
   audioUrl?: string;
   judge?: {
     id: string;
     name: string;
     convictionLevel: number;
-    isOut: boolean;
-    inNegotiation: boolean;
   };
 }
 
-type Mode = 'text' | 'audio';
-
-interface KeyParameter {
-  name: string;
-  weight: number;
-  satisfied: boolean;
+interface JudgeReply {
+  text: string;
+  audioUrl: string;
+  judge: {
+    id: string;
+    name: string;
+    convictionLevel: number;
+  };
 }
 
 interface JudgeInfo {
   id: string;
   name: string;
   convictionLevel: number;
-  isOut: boolean;
-  inNegotiation: boolean;
-  currentOffer: number | null;
-  keyParameters?: KeyParameter[];
+  persona: string;
+  questionsAsked: number;
+  currentOffer?: {
+    amount: number;
+    equity: number;
+    isFinal: boolean;
+  };
 }
+
+interface SessionParams {
+  id: string;
+  conversationHistory: Dialogue[];
+  judges: Record<string, JudgeInfo>;
+  currentJudge: string | null;
+  createdAt: Date;
+  lastUpdatedAt: Date;
+}
+
+type Mode = 'text' | 'audio';
+type AIStrength = 'weak' | 'moderate' | 'strong' | 'human';
 
 export default function FishTank() {
   const [dialogues, setDialogues] = useState<Dialogue[]>([]);
@@ -38,7 +53,10 @@ export default function FishTank() {
   const [sessionId, setSessionId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const [mode, setMode] = useState<Mode>('text');
-  
+  const aiMode: AIStrength = 'human';
+  const [sessionParams, setSessionParams] = useState<SessionParams | null>(null);
+  const [isAITyping, setIsAITyping] = useState(false);
+
   // Audio recording states
   const [isRecording, setIsRecording] = useState(false);
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
@@ -48,31 +66,59 @@ export default function FishTank() {
   // Add judges state to the component
   const [judges, setJudges] = useState<JudgeInfo[]>([]);
 
+  // Add debug state
+  const [showDebug, setShowDebug] = useState(false);
+
+  const hasStartedSession = useRef(false);
+
   // Start a new session on mount
   useEffect(() => {
+    if (hasStartedSession.current) return;
+    hasStartedSession.current = true;
     const startSession = async () => {
-      const res = await fetch('/api/fishtank/start', { method: 'POST' });
-      const data = await res.json();
-      setSessionId(data.sessionId);
-      
-      // Initialize judges
-      setJudges(data.judges.map((judge: {id: string; name: string; convictionLevel?: number}) => ({
-        ...judge,
-        convictionLevel: judge.convictionLevel || 50,
-        inNegotiation: false,
-        isOut: false,
-        currentOffer: null
-      })));
-      
-      // Use the initial greeting from a judge
-      setDialogues([{ 
-        speaker: 'judge', 
-        text: data.initialGreeting.text,
-        judge: data.initialGreeting.judge
-      }]);
+      try {
+        setLoading(true);
+        console.log('Starting new session...');
+        const response = await fetch('/api/fishtank/start', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ aiMode: aiMode }),
+        });
+
+        if (!response.ok) {
+          throw new Error('Failed to start session');
+        }
+
+        const data = await response.json();
+        console.log('Session started:', data);
+        setSessionId(data.sessionId);
+        setJudges(data.judges);
+        setDialogues([
+          {
+            speaker: 'judge',
+            text: data.initialGreeting.text,
+            judge: data.initialGreeting.judge,
+          },
+        ]);
+      } catch (error) {
+        console.error('Error starting session:', error);
+        alert('Failed to start the game. Please try again.');
+      } finally {
+        setLoading(false);
+      }
     };
     startSession();
-  }, []);
+  }, [aiMode]);
+
+  useEffect(() => {
+    if (!sessionId) return;
+    const fetchSession = async () => {
+      const res = await fetch(`/api/fishtank/session/${sessionId}`);
+      const data = await res.json();
+      setSessionParams(data);
+    };
+    fetchSession();
+  }, [sessionId, dialogues]);
 
   // Start recording function
   const startRecording = async () => {
@@ -96,8 +142,8 @@ export default function FishTank() {
       mediaRecorder.start();
       setIsRecording(true);
     } catch (err) {
-      console.error("Error accessing microphone:", err);
-      alert("Unable to access microphone. Please check permissions.");
+      console.error('Error accessing microphone:', err);
+      alert('Unable to access microphone. Please check permissions.');
     }
   };
 
@@ -108,7 +154,7 @@ export default function FishTank() {
       setIsRecording(false);
       // Stop the tracks to release the microphone
       if (mediaRecorderRef.current.stream) {
-        mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+        mediaRecorderRef.current.stream.getTracks().forEach((track) => track.stop());
       }
     }
   };
@@ -121,7 +167,7 @@ export default function FishTank() {
       setAudioBlob(null);
       // Stop the tracks to release the microphone
       if (mediaRecorderRef.current.stream) {
-        mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
+        mediaRecorderRef.current.stream.getTracks().forEach((track) => track.stop());
       }
     }
   };
@@ -131,44 +177,52 @@ export default function FishTank() {
     e.preventDefault();
     if (!input.trim() || !sessionId) return;
 
-    // Add user reply
-    setDialogues(prev => [...prev, { speaker: 'user', text: input }]);
-    setLoading(true);
+    try {
+      setLoading(true);
+      setIsAITyping(true);
+      console.log('Sending message for session:', sessionId);
+      console.log('Message:', input);
 
-    // Send to backend
-    const res = await fetch('/api/fishtank/reply', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ sessionId, message: input, mode: 'text' })
-    });
-    const data = await res.json();
+      const response = await fetch('/api/fishtank/reply', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          sessionId,
+          message: input,
+        }),
+      });
 
-    // Add judge reply
-    setDialogues(prev => [...prev, { 
-      speaker: 'judge', 
-      text: data.reply,
-      audioUrl: data.audioUrl,
-      judge: data.judge
-    }]);
+      if (!response.ok) {
+        const errorData = await response.json();
+        console.error('Server error:', errorData);
+        throw new Error(errorData.error || 'Failed to send message');
+      }
 
-    // If allJudges is provided, update all judges
-    if (data.allJudges) {
+      const data = await response.json();
+      console.log('Received response:', data);
+
+      // Update dialogues with new responses
+      setDialogues((prev) => [
+        ...prev,
+        { speaker: 'player', text: input },
+        ...data.replies.map((reply: JudgeReply) => ({
+          speaker: 'judge',
+          text: reply.text,
+          judge: reply.judge,
+          audioUrl: reply.audioUrl,
+        })),
+      ]);
+
+      // Update judges state
       setJudges(data.allJudges);
-    } else {
-      // Fallback to the old logic of updating just the responding judge
-      setJudges(prev => prev.map(j => 
-        j.id === data.judge.id 
-          ? { 
-              ...j, 
-              ...data.judge,
-              keyParameters: data.judge.keyParameters || j.keyParameters 
-            } 
-          : j
-      ));
+      setInput('');
+    } catch (error) {
+      console.error('Error sending message:', error);
+      alert('Failed to send message. Please try again.');
+    } finally {
+      setLoading(false);
+      setIsAITyping(false);
     }
-
-    setInput('');
-    setLoading(false);
   };
 
   // Handle audio submission
@@ -176,7 +230,8 @@ export default function FishTank() {
     if (!audioBlob || !sessionId) return;
 
     setLoading(true);
-    
+    setIsAITyping(true);
+
     // Create a form with the audio file
     const formData = new FormData();
     formData.append('audio', audioBlob, 'recording.wav');
@@ -185,186 +240,287 @@ export default function FishTank() {
 
     try {
       // Add user reply (audio placeholder for now)
-      setDialogues(prev => [...prev, { 
-        speaker: 'user', 
-        text: "[Audio message]"
-      }]);
+      setDialogues((prev) => [
+        ...prev,
+        {
+          speaker: 'user',
+          text: '[Audio message]',
+        },
+      ]);
 
       // Send to backend
       const res = await fetch('/api/fishtank/audio-reply', {
         method: 'POST',
-        body: formData
+        body: formData,
       });
       const data = await res.json();
 
-      // Add judge reply with audio
-      setDialogues(prev => [...prev, { 
-        speaker: 'judge', 
-        text: data.reply,
-        audioUrl: data.audioUrl,
-        judge: data.judge
-      }]);
+      // Add all judge replies
+      const newDialogues = data.replies.map((reply: JudgeReply) => ({
+        speaker: 'judge' as const,
+        text: reply.text,
+        audioUrl: reply.audioUrl,
+        judge: reply.judge,
+      }));
+      setDialogues((prev) => [...prev, ...newDialogues]);
 
-      // Auto-play the response if available
-      if (data.audioUrl) {
-        const audio = new Audio(data.audioUrl);
-        audio.play();
-      }
+      // Auto-play the responses if available
+      data.replies.forEach((reply: JudgeReply) => {
+        if (reply.audioUrl) {
+          const audio = new Audio(reply.audioUrl);
+          audio.play();
+        }
+      });
 
-      // If allJudges is provided, update all judges
+      // Update all judges
       if (data.allJudges) {
         setJudges(data.allJudges);
-      } else {
-        // Fallback to the old logic of updating just the responding judge
-        setJudges(prev => prev.map(j => 
-          j.id === data.judge.id 
-            ? { 
-                ...j, 
-                ...data.judge,
-                keyParameters: data.judge.keyParameters || j.keyParameters 
-              } 
-            : j
-        ));
       }
     } catch (err) {
-      console.error("Error sending audio:", err);
-      alert("Failed to send audio. Please try again.");
+      console.error('Error sending audio:', err);
+      alert('Failed to send audio. Please try again.');
     } finally {
       setAudioBlob(null);
       setLoading(false);
+      setIsAITyping(false);
     }
   };
 
-  return (
-    <div className="px-4 sm:px-6 lg:px-8 max-w-xl mx-auto py-8">
-      <h1 className="text-2xl font-semibold text-gray-900 mb-4">FISH TANK</h1>
-      
-      {/* Add the judges table */}
-      <JudgesTable judges={judges} />
-      
-      <div className="mb-4 flex items-center gap-4">
-        <span className="font-medium">Mode:</span>
-        <label className="flex items-center gap-1">
-          <input
-            type="radio"
-            name="mode"
-            value="text"
-            checked={mode === 'text'}
-            onChange={() => setMode('text')}
-          />
-          Text
-        </label>
-        <label className="flex items-center gap-1">
-          <input
-            type="radio"
-            name="mode"
-            value="audio"
-            checked={mode === 'audio'}
-            onChange={() => setMode('audio')}
-          />
-          Audio
-        </label>
-      </div>
-      <div className="bg-white rounded shadow p-4 mb-4 min-h-[200px]">
-        {dialogues.map((d, i) => (
-          <div
-            key={i}
-            className={`my-2 ${d.speaker === 'judge' ? 'text-left' : 'text-right'}`}
+  // Add debug panel component
+  const DebugPanel = () => {
+    if (!showDebug) return null;
+
+    return (
+      <div className="mt-8 p-4 bg-gray-100 rounded-lg border border-gray-300">
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-lg font-bold">Debug Information</h2>
+          <button
+            onClick={() => setShowDebug(false)}
+            className="text-sm text-gray-600 hover:text-gray-800"
           >
-            <span className={`font-bold ${d.speaker === 'judge' ? 'text-blue-700' : 'text-green-700'}`}>
-              {d.speaker === 'judge' ? (d.judge ? d.judge.name : 'Judge') : 'You'}:
-            </span>{' '}
-            {d.text}
-            {d.judge && (
-              <div className="text-xs text-gray-500 mt-1">
-                Conviction Level: {d.judge.convictionLevel}/100
-                {d.judge.isOut && ' 🚫 Out'}
-                {d.judge.inNegotiation && ' 💰 Interested in a deal'}
+            Hide Debug
+          </button>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          {/* Session State */}
+          <div className="bg-white p-4 rounded shadow">
+            <h3 className="font-semibold mb-2">Session State</h3>
+            <pre className="text-xs overflow-auto max-h-60">
+              {JSON.stringify(sessionParams, null, 2)}
+            </pre>
+          </div>
+
+          {/* Judges State */}
+          <div className="bg-white p-4 rounded shadow">
+            <h3 className="font-semibold mb-2">Judges State</h3>
+            <pre className="text-xs overflow-auto max-h-60">{JSON.stringify(judges, null, 2)}</pre>
+          </div>
+
+          {/* Conversation History */}
+          <div className="bg-white p-4 rounded shadow">
+            <h3 className="font-semibold mb-2">Conversation History</h3>
+            <pre className="text-xs overflow-auto max-h-60">
+              {JSON.stringify(dialogues, null, 2)}
+            </pre>
+          </div>
+
+          {/* Current State */}
+          <div className="bg-white p-4 rounded shadow">
+            <h3 className="font-semibold mb-2">Current State</h3>
+            <pre className="text-xs overflow-auto max-h-60">
+              {JSON.stringify(
+                {
+                  sessionId,
+                  loading,
+                  mode,
+                  aiMode,
+                  isRecording,
+                  isAITyping,
+                  hasAudioBlob: !!audioBlob,
+                },
+                null,
+                2,
+              )}
+            </pre>
+          </div>
+        </div>
+      </div>
+    );
+  };
+
+  return (
+    <div className="fishtank-container">
+      {/* Judges Panel - Side by side stats */}
+      <div className="judges-panel">
+        {judges.map((judge) => (
+          <div key={judge.id} className="judge-card">
+            <h3 className="judge-name">{judge.name}</h3>
+            <div className="judge-stats">
+              <div className="stat">
+                <span className="label">Conviction:</span>
+                <span
+                  className={`value ${
+                    judge.convictionLevel < 20
+                      ? 'text-red-500'
+                      : judge.convictionLevel >= 50
+                        ? 'text-green-500'
+                        : 'text-orange-500'
+                  }`}
+                >
+                  {judge.convictionLevel}%
+                </span>
               </div>
-            )}
-            {d.audioUrl && (
-              <div className="mt-1">
-                <audio src={d.audioUrl} controls className="w-full" />
+              <div className="stat">
+                <span className="label">Questions:</span>
+                <span className="value">{judge.questionsAsked}</span>
               </div>
-            )}
+              {judge.currentOffer && (
+                <div className="stat offer">
+                  <span className="label">Current Offer:</span>
+                  <span className="value">
+                    ${judge.currentOffer.amount} for {judge.currentOffer.equity}%
+                    {judge.currentOffer.isFinal && ' (Final)'}
+                  </span>
+                </div>
+              )}
+              <div className="status">
+                {judge.convictionLevel < 20 ? (
+                  <span className="text-red-500">🚫 Out</span>
+                ) : judge.currentOffer ? (
+                  <span className="text-green-500">💰 Negotiating</span>
+                ) : (
+                  <span className="text-blue-500">⏳ Listening</span>
+                )}
+              </div>
+            </div>
           </div>
         ))}
-        {loading && (
-          <div className="my-2 text-left text-blue-500">Judge is thinking...</div>
-        )}
       </div>
-      {mode === 'text' ? (
-        <form onSubmit={handleTextSubmit} className="flex gap-2">
-          <input
-            value={input}
-            onChange={e => setInput(e.target.value)}
-            placeholder="Type your reply..."
-            className="flex-1 border rounded px-3 py-2"
-            disabled={loading}
-          />
-          <button
-            type="submit"
-            className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-            disabled={loading}
-          >
-            Send
-          </button>
-        </form>
-      ) : (
-        <div className="flex flex-col gap-2">
-          {!isRecording && !audioBlob ? (
-            <button
-              onClick={startRecording}
-              className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-              disabled={loading}
+
+      {/* Main Chat Area */}
+      <div className="chat-container">
+        <div className="dialogues-container">
+          {dialogues.map((d, index) => (
+            <div key={index} className={`dialogue ${d.speaker}`}>
+              <div className="dialogue-content">
+                {d.speaker === 'judge' && d.judge && (
+                  <div className="judge-info">
+                    <span className="judge-name">{d.judge.name}</span>
+                  </div>
+                )}
+                <p>{d.text}</p>
+                {d.audioUrl && (
+                  <audio controls className="mt-2">
+                    <source src={d.audioUrl} type="audio/wav" />
+                    Your browser does not support the audio element.
+                  </audio>
+                )}
+              </div>
+            </div>
+          ))}
+          {isAITyping && (
+            <div
+              className="ai-typing-indicator"
+              style={{ color: '#888', fontStyle: 'italic', margin: '8px 0' }}
             >
-              Start Recording
-            </button>
-          ) : isRecording ? (
-            <div className="flex gap-2">
-              <button
-                onClick={stopRecording}
-                className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 flex-1"
-              >
-                Stop Recording
-              </button>
-              <button
-                onClick={cancelRecording}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-              >
-                Cancel
-              </button>
-            </div>
-          ) : (
-            <div className="flex gap-2">
-              <button
-                onClick={handleAudioSubmit}
-                className="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 flex-1"
-                disabled={loading}
-              >
-                Send Recording
-              </button>
-              <button
-                onClick={() => setAudioBlob(null)}
-                className="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600"
-                disabled={loading}
-              >
-                Discard
-              </button>
-            </div>
-          )}
-          {isRecording && (
-            <div className="text-center text-red-600 animate-pulse font-medium">
-              Recording in progress...
-            </div>
-          )}
-          {audioBlob && !isRecording && (
-            <div className="mt-2">
-              <audio src={URL.createObjectURL(audioBlob)} controls className="w-full" />
+              AI is generating a response...
             </div>
           )}
         </div>
-      )}
+
+        <div className="input-container">
+          {mode === 'text' ? (
+            <form onSubmit={handleTextSubmit} className="text-input-form">
+              <input
+                type="text"
+                value={input}
+                onChange={(e) => setInput(e.target.value)}
+                placeholder="Type your response..."
+                disabled={loading || isAITyping}
+                className="text-input"
+              />
+              <button type="submit" disabled={loading || isAITyping} className="submit-button">
+                {loading ? 'Sending...' : 'Send'}
+              </button>
+              <button
+                type="button"
+                onClick={async () => {
+                  if (!sessionId) return;
+                  try {
+                    setLoading(true);
+                    setIsAITyping(true);
+                    const response = await fetch('/api/fishtank/ai-player-reply', {
+                      method: 'POST',
+                      headers: { 'Content-Type': 'application/json' },
+                      body: JSON.stringify({ sessionId }),
+                    });
+                    const data = await response.json();
+                    if (data.reply) {
+                      setInput(data.reply);
+                    }
+                  } catch (error) {
+                    console.error('Error generating AI reply:', error);
+                  } finally {
+                    setLoading(false);
+                    setIsAITyping(false);
+                  }
+                }}
+                disabled={loading || isAITyping}
+                className="ai-button"
+              >
+                🤖 AI
+              </button>
+            </form>
+          ) : (
+            <div className="audio-input-container">
+              {!isRecording && !audioBlob && (
+                <button onClick={startRecording} className="record-button">
+                  Start Recording
+                </button>
+              )}
+              {isRecording && (
+                <div className="recording-controls">
+                  <button onClick={stopRecording} className="stop-button">
+                    Stop Recording
+                  </button>
+                  <button onClick={cancelRecording} className="cancel-button">
+                    Cancel
+                  </button>
+                </div>
+              )}
+              {audioBlob && (
+                <div className="audio-preview">
+                  <audio src={URL.createObjectURL(audioBlob)} controls />
+                  <div className="audio-actions">
+                    <button
+                      onClick={handleAudioSubmit}
+                      disabled={loading}
+                      className="submit-button"
+                    >
+                      {loading ? 'Sending...' : 'Send'}
+                    </button>
+                    <button onClick={cancelRecording} className="cancel-button">
+                      Cancel
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
+          )}
+
+          <div className="mode-toggle">
+            <button onClick={() => setMode('text')} className={mode === 'text' ? 'active' : ''}>
+              Text
+            </button>
+            <button onClick={() => setMode('audio')} className={mode === 'audio' ? 'active' : ''}>
+              Audio
+            </button>
+          </div>
+        </div>
+      </div>
+
+      {showDebug && <DebugPanel />}
     </div>
   );
-} 
+}

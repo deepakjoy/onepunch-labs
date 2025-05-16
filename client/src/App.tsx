@@ -1,17 +1,17 @@
-'use client'
+'use client';
 
-import { useState } from 'react'
-import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react'
-import { Routes, Route, Link, useLocation } from 'react-router-dom'
+import { useState } from 'react';
+import { Dialog, DialogBackdrop, DialogPanel, TransitionChild } from '@headlessui/react';
+import { Routes, Route, Link, useLocation } from 'react-router-dom';
 import {
   Bars3Icon,
   CalendarIcon,
   FolderIcon,
   HomeIcon,
   XMarkIcon,
-} from '@heroicons/react/24/outline'
-import VoiceCoach from '@components/VoiceCoach'
-import FishTank from '@components/FishTank'
+} from '@heroicons/react/24/outline';
+import VoiceCoach from '@components/VoiceCoach';
+import FishTank from '@components/FishTank';
 
 type NavigationItem = {
   name: string;
@@ -23,22 +23,22 @@ type NavigationItem = {
 const navigation: NavigationItem[] = [
   { name: 'Home', href: '/', icon: HomeIcon },
   { name: 'Voice coach', href: '/voice-coach', icon: FolderIcon },
-  { name: 'Fish Tank', href: '/fish-tank', icon: CalendarIcon }
-]
+  { name: 'Fish Tank', href: '/fish-tank', icon: CalendarIcon },
+];
 const projects = [
   { id: 1, name: 'Voice Coach', href: '#', initial: 'H', current: false },
-  { id: 2, name: 'Fish Tank', href: '#', initial: 'H', current: false }
-]
+  { id: 2, name: 'Fish Tank', href: '#', initial: 'H', current: false },
+];
 
 function classNames(...classes: string[]) {
-  return classes.filter(Boolean).join(' ')
+  return classes.filter(Boolean).join(' ');
 }
 
 export default function Example() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const location = useLocation();
   // Determine which nav item is current based on location.pathname
-  const navWithCurrent: NavigationItem[] = navigation.map(item => {
+  const navWithCurrent: NavigationItem[] = navigation.map((item) => {
     if (item.href === '/') {
       return { ...item, current: location.pathname === '/' };
     }
@@ -60,7 +60,11 @@ export default function Example() {
           >
             <TransitionChild>
               <div className="absolute top-0 left-full flex w-16 justify-center pt-5 duration-300 ease-in-out data-closed:opacity-0">
-                <button type="button" onClick={() => setSidebarOpen(false)} className="-m-2.5 p-2.5">
+                <button
+                  type="button"
+                  onClick={() => setSidebarOpen(false)}
+                  className="-m-2.5 p-2.5"
+                >
                   <span className="sr-only">Close sidebar</span>
                   <XMarkIcon aria-hidden="true" className="size-6 text-white" />
                 </button>
@@ -93,7 +97,9 @@ export default function Example() {
                             <item.icon
                               aria-hidden="true"
                               className={classNames(
-                                item.current ? 'text-white' : 'text-indigo-200 group-hover:text-white',
+                                item.current
+                                  ? 'text-white'
+                                  : 'text-indigo-200 group-hover:text-white',
                                 'size-6 shrink-0',
                               )}
                             />
@@ -215,7 +221,11 @@ export default function Example() {
       </div>
 
       <div className="sticky top-0 z-40 flex items-center gap-x-6 bg-indigo-600 px-4 py-4 shadow-xs sm:px-6 lg:hidden">
-        <button type="button" onClick={() => setSidebarOpen(true)} className="-m-2.5 p-2.5 text-indigo-200 lg:hidden">
+        <button
+          type="button"
+          onClick={() => setSidebarOpen(true)}
+          className="-m-2.5 p-2.5 text-indigo-200 lg:hidden"
+        >
           <span className="sr-only">Open sidebar</span>
           <Bars3Icon aria-hidden="true" className="size-6" />
         </button>
@@ -224,13 +234,13 @@ export default function Example() {
           <span className="sr-only">Your profile</span>
           <img
             alt=""
-            src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+            src="https://pbs.twimg.com/profile_images/1506140174895685639/6YpMGBAq_400x400.jpg"
             className="size-8 rounded-full bg-indigo-700"
           />
         </a>
       </div>
 
-      <main className="py-10 lg:pl-72">
+      <main className="lg:pl-72">
         <Routes>
           <Route path="/" element={<div className="px-4 sm:px-6 lg:px-8">Home</div>} />
           <Route path="/voice-coach" element={<VoiceCoach />} />
@@ -238,5 +248,5 @@ export default function Example() {
         </Routes>
       </main>
     </div>
-  )
+  );
 }

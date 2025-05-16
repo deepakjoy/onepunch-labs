@@ -1,4 +1,4 @@
-import { type Request, type Response, Router } from 'express';
+import express, { Request, Response } from 'express';
 import multer from 'multer';
 import path from 'path';
 import fs from 'fs';
@@ -10,6 +10,20 @@ import dotenv from 'dotenv';
 // Load environment variables
 dotenv.config();
 
+// Game Configuration
+const GAME_CONFIG = {
+  maxEvaluationResponses: 3, // Number of player responses before moving to offers stage
+  maxNegotiationRounds: 3,   // Maximum number of negotiation rounds
+};
+
+// Game Stage Types
+type GameStage = 'evaluation' | 'initial_offers' | 'negotiation' | 'closure';
+
+// Shark Tank Game Config
+// const FISHTANK_CONFIG = {
+//   maxQuestionsBeforeNegotiation: 2, // Force negotiation after this many player responses
+// };
+
 // Base types for the Shark Tank simulator
 interface Judge {
   id: string;
@@ -18,42 +32,47 @@ interface Judge {
   persona: string;
   prompt: string;
   convictionLevel: number;
-  convictionThreshold: number;
-  keyParameters: KeyParameter[];
-  inNegotiation: boolean;
-  currentOffer: string | null;
-  isOut: boolean;
-  hasAskedQuestion: boolean;
+  questionsAsked: number;
+  currentOffer: {
+    amount: number;
+    equity: number;
+    isFinal: boolean;
+  } | null;
 }
 
-interface KeyParameter {
-  name: string;
-  weight: number;
-  satisfied: boolean;
-}
-
+// Update Dialogue interface
 interface Dialogue {
   speaker: string;
   text: string;
+  judge?: {
+    id: string;
+    name: string;
+    persona: string;
+    convictionLevel: number;
+  };
 }
 
+// Add JudgeOffer interface
+interface JudgeOffer {
+  amount: number;
+  equity: number;
+  isFinal: boolean;
+}
+
+// Update GameSession interface
 interface GameSession {
   id: string;
-  pitchTranscript: string;
-  askAmount: string;
-  equityOffered: string;
-  companyValuation: string;
   conversationHistory: Dialogue[];
   judges: Record<string, Judge>;
-  negotiationMode: boolean;
-  judgesInNegotiation: string[];
-  judgesMadeOffer: Set<string>;
-  acceptedDeals: Set<string>;
-  judgesOut: Set<string>;
-  currentJudge: string | null;
-  sharedKnowledge: Record<string, string>;
+  currentJudge: string;
   createdAt: Date;
   lastUpdatedAt: Date;
+  currentStage: GameStage;
+  stageProgress: number;
+  playerResponseCount: number;
+  negotiationRound: number;
+  judgeOffers: Record<string, JudgeOffer>;
+  acceptedOffer: string | null;
 }
 
 // Initialize API clients
@@ -61,6 +80,7 @@ const elevenLabs = new ElevenLabsClient({
   apiKey: process.env.ELEVENLABS_API_KEY || ''
 });
 
+// Initialize OpenAI client
 const openai = new OpenAI({
   apiKey: process.env.OPENAI_API_KEY || ''
 });
@@ -124,59 +144,34 @@ class JudgeManager {
         name: "Namita Thapar",
         voiceId: "7XWoY4Z0vEgFmvOBMut1",
         persona: "Decisive, expertise-driven pharma expert",
-        prompt: "You are Namita Thapar, the Shark Tank India judge renowned for your domain expertise in healthcare and pharma.\nYou keep responses conversational and brief (1-3 sentences).\nYou value founders who deeply understand their space and have solid unit economics.\nWhen something is outside your wheelhouse, you say: \"Yeh mera expertise nahi hai, I'm out.\"\nAsk sharp questions about specific areas that OTHER JUDGES HAVEN'T ALREADY ASKED ABOUT.\nDO NOT repeat questions that have already been asked in the conversation history.",
-        convictionLevel: 10,
-        convictionThreshold: 40,
-        keyParameters: [
-          { name: "founder_expertise", weight: 30, satisfied: false },
-          { name: "healthcare_applications", weight: 30, satisfied: false },
-          { name: "Innovation", weight: 40, satisfied: false }
-        ],
-        inNegotiation: false,
-        currentOffer: null,
-        isOut: false,
-        hasAskedQuestion: false
+        prompt: "You are Namita Thapar, the Shark Tank India judge renowned for your domain expertise in healthcare and pharma. Keep responses brief (1-3 sentences). Focus on healthcare, pharma, and solid unit economics.",
+        convictionLevel: 40,
+        questionsAsked: 0,
+        currentOffer: null
       },
       judge2: {
         id: 'judge2',
         name: "Aman Gupta",
         voiceId: "PWuKnjMQhLOeUlRE7jgL",
         persona: "Strategic, marketing and brand expert",
-        prompt: "You are Aman Gupta, the Shark Tank India judge and co-founder of boAt, known for your strategic vision.\nYou keep responses conversational and brief (1-3 sentences).\nYou look for ventures with brand potential, marketing strategy, and customer loyalty.\nYou often say: \"Hum bhi bana lenge\" to signal confidence, and \"Shark Tank ki Pitch ho ya Cricket ki... Jeetna humein aata hai.\"\nAsk sharp questions about specific areas that OTHER JUDGES HAVEN'T ALREADY ASKED ABOUT.\nDO NOT repeat questions that have already been asked in the conversation history.",
-        convictionLevel: 15,
-        convictionThreshold: 50,
-        keyParameters: [
-          { name: "brand_potential", weight: 40, satisfied: false },
-          { name: "marketing_strategy", weight: 40, satisfied: false },
-          { name: "customer_retention", weight: 20, satisfied: false }
-        ],
-        inNegotiation: false,
-        currentOffer: null,
-        isOut: false,
-        hasAskedQuestion: false
+        prompt: "You are Aman Gupta, the Shark Tank India judge and co-founder of boAt. Keep responses brief (1-3 sentences). Focus on brand potential, marketing strategy, and customer loyalty.",
+        convictionLevel: 50,
+        questionsAsked: 0,
+        currentOffer: null
       },
       judge3: {
         id: 'judge3',
         name: "Ashneer Grover",
         voiceId: "TWdmNgGcFTnP8osgYASY",
         persona: "Blunt, analytical, focused on valuation and financials",
-        prompt: "You are Ashneer Grover, the Shark Tank India judge known for your blunt style.\nYou keep responses conversational and brief (1-3 sentences).\nYou dissect business models with ruthless precision and call out inconsistencies as \"Doglapan.\"\nWhen unimpressed, you fire off: \"Bhai, kya kar raha hai tu?\"\nAsk sharp questions about specific areas that OTHER JUDGES HAVEN'T ALREADY ASKED ABOUT.\nDO NOT repeat questions that have already been asked in the conversation history.",
-        convictionLevel: 5,
-        convictionThreshold: 50,
-        keyParameters: [
-          { name: "valuation_justification", weight: 40, satisfied: false },
-          { name: "market_size", weight: 20, satisfied: false },
-          { name: "unit_economics", weight: 20, satisfied: false }
-        ],
-        inNegotiation: false,
-        currentOffer: null,
-        isOut: false,
-        hasAskedQuestion: false
+        prompt: "You are Ashneer Grover, the Shark Tank India judge known for your blunt style. Keep responses brief (1-3 sentences). Focus on business model, valuation, and financials.",
+        convictionLevel: 35,
+        questionsAsked: 0,
+        currentOffer: null
       }
     };
   }
   
-  // Get profiles of all judges (public facing info)
   getJudgeProfiles() {
     return Object.values(this.judges).map(judge => ({
       id: judge.id,
@@ -190,7 +185,7 @@ class JudgeManager {
 const judgeManager = new JudgeManager();
 
 // Create router for Fishtank endpoints
-const fishtankRouter = Router();
+const fishtankRouter = express.Router();
 
 // Endpoint: Get all judge profiles
 fishtankRouter.get('/judges', (req: Request, res: Response) => {
@@ -198,66 +193,50 @@ fishtankRouter.get('/judges', (req: Request, res: Response) => {
 });
 
 // Endpoint: Start a new game session
-fishtankRouter.post('/start', (req: Request, res: Response) => {
-  console.log('POST /start endpoint called');
+fishtankRouter.post('/start', async (req: Request, res: Response) => {
+  // const { aiMode } = req.body as { aiMode?: AIStrength['strength'] };
   const sessionId = uuidv4();
   
   // Initialize a new game session
-  const newSession: GameSession = {
+  const session: GameSession = {
     id: sessionId,
-    pitchTranscript: '',
-    askAmount: '0',
-    equityOffered: '0',
-    companyValuation: '0',
     conversationHistory: [],
     judges: JSON.parse(JSON.stringify(judgeManager.judges)), // Deep clone
-    negotiationMode: false,
-    judgesInNegotiation: [],
-    judgesMadeOffer: new Set(),
-    acceptedDeals: new Set(),
-    judgesOut: new Set(),
-    currentJudge: null,
-    sharedKnowledge: {},
+    currentJudge: 'judge1',
     createdAt: new Date(),
-    lastUpdatedAt: new Date()
+    lastUpdatedAt: new Date(),
+    currentStage: 'evaluation',
+    stageProgress: 0,
+    playerResponseCount: 0,
+    negotiationRound: 0,
+    judgeOffers: {},
+    acceptedOffer: null
   };
   
   // Store the session
-  sessions[sessionId] = newSession;
+  sessions[sessionId] = session;
   
   // Select a random judge to start the conversation
-  const judges = Object.values(newSession.judges);
+  const judges = Object.values(session.judges);
   const startingJudge = judges[Math.floor(Math.random() * judges.length)];
-  newSession.currentJudge = startingJudge.id;
   
   // Create initial greeting from the judge
-  const greetings = [
-    `Hi there! I'm ${startingJudge.name}. Tell us about your business and what you're looking for today.`,
-    `Welcome to the tank. I'm ${startingJudge.name}. So, what are you pitching to us?`,
-    `So, you've entered the shark tank. I'm ${startingJudge.name}. Let's hear your pitch.`,
-    `Alright, I'm ${startingJudge.name}. You have 60 seconds to tell me why I should invest in your company.`
-  ];
-  
-  const greeting = greetings[Math.floor(Math.random() * greetings.length)];
+  const greeting = `Welcome to the tank! I'm ${startingJudge.name}. You have 60 seconds to tell us about your business and what you're looking for today.`;
   
   // Add greeting to conversation history
-  newSession.conversationHistory.push({
+  session.conversationHistory.push({
     speaker: 'judge',
-    text: greeting
+    text: greeting,
+    judge: formatJudgeForResponse(startingJudge)
   });
   
-  // Return session ID, judges, and the initial greeting
+  // Return session ID and initial greeting
   res.json({
     sessionId,
-    judges: judgeManager.getJudgeProfiles(),
+    judges: Object.values(session.judges).map(formatJudgeForResponse),
     initialGreeting: {
       text: greeting,
-      judge: {
-        id: startingJudge.id,
-        name: startingJudge.name,
-        persona: startingJudge.persona,
-        convictionLevel: startingJudge.convictionLevel
-      }
+      judge: formatJudgeForResponse(startingJudge)
     }
   });
 });
@@ -302,418 +281,480 @@ fishtankRouter.get('/session/:sessionId', (req: Request, res: Response) => {
     return;
   }
   
-  // Return session state (filtered for frontend needs)
+  // Return full session state for frontend display
   const session = sessions[sessionId];
   res.json({
     id: session.id,
-    negotiationMode: session.negotiationMode,
-    judgesInNegotiation: session.judgesInNegotiation,
-    acceptedDeals: Array.from(session.acceptedDeals),
-    judgesOut: Array.from(session.judgesOut),
-    currentJudge: session.currentJudge,
-    judges: Object.values(session.judges).map(judge => ({
-      id: judge.id,
-      name: judge.name,
-      persona: judge.persona,
-      convictionLevel: judge.convictionLevel,
-      inNegotiation: judge.inNegotiation,
-      isOut: judge.isOut,
-      currentOffer: judge.currentOffer
-    }))
+    conversationHistory: session.conversationHistory,
+    stage: session.currentStage,
+    stageProgress: session.stageProgress,
+    playerResponseCount: session.playerResponseCount,
+    negotiationRound: session.negotiationRound,
+    judgeOffers: session.judgeOffers,
+    acceptedOffer: session.acceptedOffer,
+    createdAt: session.createdAt,
+    lastUpdatedAt: session.lastUpdatedAt,
+    judges: Object.values(session.judges).map(formatJudgeForResponse)
   });
 });
 
-// Add this function to analyze and update key parameters based on user responses
-async function analyzeKeyParameters(session: GameSession, judgeId: string, userMessage: string): Promise<void> {
-  const judge = session.judges[judgeId];
-  
+// Add function to extract offer details
+async function extractOfferDetails(response: string): Promise<{ amount: number; equity: number } | null> {
   try {
-    // Create a prompt for analyzing how well the user message satisfies each key parameter
-    const prompt = `
-Evaluate how well the entrepreneur's message satisfies each of the key investment parameters for judge ${judge.name}.
-Score each parameter from 0-10, where 0 means completely unsatisfied and 10 means fully satisfied.
+    const prompt = `Extract the investment offer details from this Shark Tank judge's response. Return ONLY a JSON object with the amount in dollars and equity percentage.
 
-Parameters to evaluate:
-${judge.keyParameters.map(param => `- ${param.name}: ${getParameterDescription(param.name)}`).join('\n')}
+Judge's response: "${response}"
 
-Recent conversation context:
-${session.conversationHistory.slice(-5).map(d => `${d.speaker === 'judge' ? 'Judge' : 'Entrepreneur'}: ${d.text}`).join('\n')}
-
-Entrepreneur's message: "${userMessage}"
-
-Return ONLY valid JSON in this format:
+Return a JSON object in this format:
 {
-  ${judge.keyParameters.map(param => `"${param.name}": 0`).join(',\n  ')}
+  "amount": number (the dollar amount, e.g., 500000 for $500,000),
+  "equity": number (the equity percentage, e.g., 20 for 20%)
 }
-`;
 
-    // Call OpenAI to analyze the parameters
-    const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+If no clear offer is made, return null.`;
+
+    const result = await openai.chat.completions.create({
+      model: "gpt-4-turbo-preview",
       messages: [
-        { role: "system", content: "You analyze entrepreneur pitches against specific investment criteria." },
+        { role: "system", content: "You are extracting investment offer details from a Shark Tank judge's response." },
         { role: "user", content: prompt }
       ],
-      response_format: { type: "json_object" },
-      max_tokens: 150,
+      max_tokens: 100,
       temperature: 0.3,
     });
-    
-    // Parse the response
-    const analysisResult = JSON.parse(response.choices[0].message.content?.trim() || "{}");
-    
-    // Update each parameter's satisfaction status
-    let convictionChange = 0;
-    
-    for (const param of judge.keyParameters) {
-      const score = analysisResult[param.name] || 0;
-      
-      // Parameter is satisfied if score >= 7
-      const wasSatisfied = param.satisfied;
-      param.satisfied = score >= 7;
-      
-      // Calculate conviction change based on parameter weight and satisfaction
-      if (!wasSatisfied && param.satisfied) {
-        // Newly satisfied parameter gives a big boost
-        convictionChange += param.weight * 0.5;
-      } else if (param.satisfied) {
-        // Already satisfied parameter gets a small boost
-        convictionChange += param.weight * 0.1;
-      } else {
-        // Score contributes partially to conviction
-        convictionChange += (score / 10) * param.weight * 0.2;
-      }
-    }
-    
-    // Update the judge's conviction level
-    judge.convictionLevel = Math.max(0, Math.min(100, judge.convictionLevel + convictionChange));
-    
-    console.log(`Updated ${judge.name}'s key parameters. Conviction now: ${judge.convictionLevel}`);
-    
+
+    const content = result.choices[0].message.content?.trim() || 'null';
+    const cleanContent = content.replace(/```json\n?|\n?```/g, '');
+    const offer = JSON.parse(cleanContent);
+    console.log('Extracted offer details:', offer);
+    return offer;
   } catch (error) {
-    console.error(`Error analyzing key parameters for ${judge.name}:`, error);
+    console.error('Error extracting offer details:', error);
+    return null;
   }
 }
 
-// Helper function to get descriptions for key parameters
-function getParameterDescription(paramName: string): string {
-  const descriptions: Record<string, string> = {
-    // Namita's parameters
-    "founder_expertise": "Whether the founders demonstrate deep expertise in their field",
-    "healthcare_applications": "Whether the product has applications in healthcare or wellbeing",
-    "Innovation": "Whether the product offers genuine innovation in its space",
-    
-    // Aman's parameters
-    "brand_potential": "Whether the product has strong brand potential and market appeal",
-    "marketing_strategy": "Whether there's a clear and effective marketing strategy",
-    "customer_retention": "Whether the product has strong customer retention metrics",
-    
-    // Ashneer's parameters
-    "valuation_justification": "Whether the valuation is justified by metrics and traction",
-    "market_size": "Whether the target market is large enough to build a significant business",
-    "unit_economics": "Whether the unit economics are sound and profitable",
-    
-    // Generic fallback
-    "default": "How well this aspect of the business satisfies investment criteria"
-  };
-  
-  return descriptions[paramName] || descriptions["default"];
-}
-
-// Add this function to update all judges whenever the player speaks
-async function updateAllJudges(session: GameSession, userMessage: string): Promise<void> {
-  // Process each non-eliminated judge in parallel
-  const updatePromises = Object.values(session.judges)
-    .filter(judge => !judge.isOut)
-    .map(judge => analyzeKeyParameters(session, judge.id, userMessage));
-  
-  // Wait for all judges to be updated
-  await Promise.all(updatePromises);
-  
-  console.log("Updated conviction levels for all judges based on new information");
-}
-
-// Modify the generateJudgeResponse function to NOT update key parameters
-async function generateJudgeResponse(
-  session: GameSession,
-  judgeId: string,
-  userMessage: string
-): Promise<{ text: string; updatedConviction: number }> {
+// Add function to generate judge response
+async function generateJudgeResponse(session: GameSession, judgeId: string, userMessage: string, contextPrompt?: string): Promise<string> {
   const judge = session.judges[judgeId];
   
-  // Extract recent conversation history (last 10 messages)
-  const recentHistory = session.conversationHistory
-    .slice(-10)
-    .map(d => `${d.speaker === 'judge' ? 'Judge' : 'Entrepreneur'}: ${d.text}`)
-    .join('\n');
-  
-  // Format the shared knowledge about the pitch
-  const knowledgeContext = Object.entries(session.sharedKnowledge)
-    .map(([key, value]) => `${key}: ${value}`)
-    .join('\n');
-  
-  // Format the key parameters status
-  const keyParamsStatus = judge.keyParameters.map(param => {
-    return `${param.name}: ${param.satisfied ? 'Satisfied' : 'Not satisfied'} (${param.weight}% weight)`;
-  }).join('\n');
-  
-  // Construct the prompt with enhanced context
   const prompt = `
-You are ${judge.name}, a Shark Tank judge with the following persona: ${judge.persona}
+You are ${judge.name}, a Shark Tank judge with this persona: ${judge.persona}
 
 ${judge.prompt}
 
-Session Information:
-- Ask Amount: ${session.askAmount}
-- Equity Offered: ${session.equityOffered}
-- Company Valuation: ${session.companyValuation}
-
-Your Key Investment Parameters (your main criteria):
-${keyParamsStatus}
-
 Your current conviction level: ${judge.convictionLevel}/100
-Conviction needed to make an offer: ${judge.convictionThreshold}/100
 
-Known Information:
-${knowledgeContext}
+Recent conversation:
+${session.conversationHistory.slice(-5).map(d => `${d.speaker}: ${d.text}`).join('\n')}
 
-Recent Conversation:
-${recentHistory}
+Entrepreneur's message: "${userMessage}"
+${contextPrompt ? contextPrompt : ''}
 
-Entrepreneur: ${userMessage}
+${session.currentStage === 'initial_offers' ? `
+IMPORTANT: You must make a specific offer that includes:
+1. A dollar amount (e.g., $500,000)
+2. An equity percentage (e.g., 20%)
 
-As ${judge.name}, respond with only 1-3 sentences to the entrepreneur's message above.
-Based on your key parameters, respond authentically - if your criteria are being met, show interest.
-If they're not addressing your criteria, push them on that or express skepticism.
-If your conviction level is above ${judge.convictionThreshold}, consider beginning negotiation.
-If your conviction is below 10, consider dropping out.
-Don't explicitly state your internal parameters or conviction level in your response.
+Express your offer in your own natural language, but make sure to clearly state both the amount and equity percentage.
+If you're not interested, indicate that you're out or not interested.` : ''}
 
-Response:
-`;
+Respond with 1-3 sentences. If your conviction is below 20, indicate you're out.`;
 
   try {
-    console.log(`Generating response for ${judge.name}...`);
-    
-    // Call OpenAI API
     const response = await openai.chat.completions.create({
-      model: "gpt-3.5-turbo",
+      model: "gpt-4-turbo-preview",
       messages: [
-        { role: "system", content: "You are a Shark Tank judge evaluating a startup pitch." },
+        { role: "system", content: "You are a Shark Tank judge evaluating a pitch." },
         { role: "user", content: prompt }
       ],
       max_tokens: 150,
       temperature: 0.7,
     });
     
-    const responseText = response.choices[0].message.content?.trim() || 
-      "I'm not sure about that. Let me ask you something else.";
+    const reply = response.choices[0].message.content?.trim() || 
+      "I need to think about this more.";
     
-    // Return the response text and current conviction level
-    return {
-      text: responseText,
-      updatedConviction: judge.convictionLevel
-    };
+    // Update judge state based on response
+    if (reply.toLowerCase().includes("i'm out") || reply.toLowerCase().includes("im out")) {
+      judge.convictionLevel = 0; // Set conviction to 0 to indicate out
+    } else if (session.currentStage === 'initial_offers') {
+      // Extract offer details using AI
+      const offerDetails = await extractOfferDetails(reply);
+      
+      if (offerDetails) {
+        judge.currentOffer = {
+          amount: offerDetails.amount,
+          equity: offerDetails.equity,
+          isFinal: false
+        };
+        session.judgeOffers[judge.id] = judge.currentOffer;
+      }
+    }
+    
+    judge.questionsAsked++;
+    return reply;
   } catch (error) {
     console.error('Error generating judge response:', error);
-    return {
-      text: "I need to think about this more. Let's move on.",
-      updatedConviction: judge.convictionLevel
-    };
+    return "I need to think about this more.";
   }
 }
 
-// Add this function to select which judge should respond
-function selectRespondingJudge(session: GameSession): Judge {
-  // If there's a current judge in focus, continue with them
-  if (session.currentJudge && !session.judges[session.currentJudge].isOut) {
-    return session.judges[session.currentJudge];
-  }
+// Add function to analyze message and update conviction
+async function analyzeMessage(session: GameSession, judgeId: string, userMessage: string): Promise<void> {
+  const judge = session.judges[judgeId];
   
-  // Filter out judges who are "out"
-  const availableJudges = Object.values(session.judges).filter(j => !j.isOut);
-  
-  // If no judges left, use a random one anyway (shouldn't happen in normal gameplay)
-  if (availableJudges.length === 0) {
-    return Object.values(session.judges)[0];
-  }
-  
-  // Find judges who haven't asked questions yet
-  const judgesWhoHaventAsked = availableJudges.filter(j => !j.hasAskedQuestion);
-  
-  if (judgesWhoHaventAsked.length > 0) {
-    // Prioritize judges who haven't spoken yet
-    const selectedJudge = judgesWhoHaventAsked[Math.floor(Math.random() * judgesWhoHaventAsked.length)];
-    selectedJudge.hasAskedQuestion = true; // Mark as having asked a question
-    return selectedJudge;
-  }
-  
-  // Otherwise, choose randomly from available judges
-  return availableJudges[Math.floor(Math.random() * availableJudges.length)];
-}
-
-// Add this function to extract key information from user messages
-async function extractKeyInformation(session: GameSession, message: string): Promise<void> {
   try {
     const prompt = `
-Extract key business information from the entrepreneur's message.
-If any of the following are mentioned, extract them. Otherwise, leave them as "unknown".
+Evaluate this entrepreneur's message based on your expertise and interests.
+Score from 0-10 how well it aligns with your investment criteria.
 
-Format your response as JSON with these fields:
-{
-  "valuation": "The valuation mentioned or 'unknown'",
-  "equity": "The equity percentage mentioned or 'unknown'",
-  "ask": "The investment amount asked for or 'unknown'",
-  "revenue": "Current or projected revenue or 'unknown'",
-  "profit_margin": "Profit margin or 'unknown'",
-  "customer_acquisition_cost": "CAC or 'unknown'",
-  "market_size": "Market size or 'unknown'"
-}
+Your persona: ${judge.persona}
+Your focus areas: ${judge.prompt}
 
-Entrepreneur's message: "${message}"
-`;
+Recent conversation:
+${session.conversationHistory.slice(-5).map(d => `${d.speaker}: ${d.text}`).join('\n')}
+
+Entrepreneur's message: "${userMessage}"
+
+Return ONLY a number from 0-10 representing your conviction level.`;
 
     const response = await openai.chat.completions.create({
-      model: "gpt-4o",
+      model: "gpt-4-turbo-preview",
       messages: [
-        { role: "system", content: "You extract structured business information from text." },
+        { role: "system", content: "You are a Shark Tank judge evaluating a pitch." },
         { role: "user", content: prompt }
       ],
-      response_format: { type: "json_object" },
-      max_tokens: 300,
+      max_tokens: 10,
       temperature: 0.3,
     });
     
-    const info = JSON.parse(response.choices[0].message.content?.trim() || "{}");
+    const rawScore = response.choices[0].message.content?.trim() || "0";
+    const newScore = parseInt(rawScore);
     
-    // Update session with extracted information
-    if (info.valuation && info.valuation !== 'unknown') {
-      session.companyValuation = info.valuation;
-      session.sharedKnowledge['valuation'] = info.valuation;
+    // Defensive check for LLM response
+    if (isNaN(newScore)) {
+      console.error(`Invalid score received from LLM for ${judge.name}: "${rawScore}"`);
+      return;
     }
     
-    if (info.equity && info.equity !== 'unknown') {
-      session.equityOffered = info.equity;
-      session.sharedKnowledge['equity'] = info.equity;
+    if (newScore < 0 || newScore > 10) {
+      console.error(`Out of bounds score received from LLM for ${judge.name}: ${newScore} (expected 0-10)`);
+      return;
     }
     
-    if (info.ask && info.ask !== 'unknown') {
-      session.askAmount = info.ask;
-      session.sharedKnowledge['ask'] = info.ask;
-    }
+    const newConviction = newScore * 10; // Convert to 0-100 scale
     
-    // Store other extracted information in shared knowledge
-    Object.entries(info).forEach(([key, value]) => {
-      if (value && value !== 'unknown') {
-        session.sharedKnowledge[key] = value as string;
-      }
-    });
+    // Calculate weighted average: 70% current conviction, 30% new score
+    // This creates a more gradual change in conviction
+    judge.convictionLevel = Math.round(
+      (judge.convictionLevel * 0.7) + (newConviction * 0.3)
+    );
     
   } catch (error) {
-    console.error('Error extracting key information:', error);
+    console.error(`Error analyzing message for ${judge.name}:`, error);
   }
 }
 
-// Create a shared function for processing user input (text or transcribed audio)
-async function processUserInput(
-  session: GameSession, 
-  userMessage: string,
-  mode: 'text' | 'audio'
-): Promise<{
-  reply: string;
-  audioUrl: string;
-  respondingJudge: Judge;
+// Add function to analyze player's response intent
+async function analyzePlayerResponse(session: GameSession, userInput: string): Promise<{
+  isAcceptance: boolean;
+  isCounterOffer: boolean;
+  counterOfferAmount?: number;
+  counterOfferEquity?: number;
 }> {
-  // Add user message to conversation history
-  session.conversationHistory.push({ speaker: 'user', text: userMessage });
-  
-  // Extract key information from user message
-  await extractKeyInformation(session, userMessage);
-  
-  // Update all judges' conviction based on user message
-  await updateAllJudges(session, userMessage);
-  
-  // Select which judge should respond
-  const respondingJudge = selectRespondingJudge(session);
-  session.currentJudge = respondingJudge.id;
-  
-  // Generate judge response using OpenAI
-  const { text: reply, updatedConviction } = await generateJudgeResponse(
-    session,
-    respondingJudge.id,
-    userMessage
-  );
-  
-  // Update judge's conviction level
-  respondingJudge.convictionLevel = updatedConviction;
-  
-  // Check if judge is now convinced enough to make an offer
-  if (respondingJudge.convictionLevel >= respondingJudge.convictionThreshold) {
-    respondingJudge.inNegotiation = true;
-    if (!session.judgesInNegotiation.includes(respondingJudge.id)) {
-      session.judgesInNegotiation.push(respondingJudge.id);
+  try {
+    const prompt = `Analyze this entrepreneur's response in the Shark Tank game. The game is in the ${session.currentStage} stage.
+
+Recent conversation:
+${session.conversationHistory.slice(-5).map(m => `${m.speaker === 'judge' ? m.judge?.name : 'You'}: ${m.text}`).join('\n')}
+
+Entrepreneur's response: "${userInput}"
+
+Determine if the entrepreneur is:
+1. Accepting an offer
+2. Making a counter-offer
+3. Neither
+
+If they're making a counter-offer, extract the amount and equity percentage they're asking for.
+
+Return ONLY a JSON object in this exact format, with no markdown formatting or additional text:
+{
+  "isAcceptance": boolean,
+  "isCounterOffer": boolean,
+  "counterOfferAmount": number or null,
+  "counterOfferEquity": number or null
+}`;
+
+    const response = await openai.chat.completions.create({
+      model: "gpt-4-turbo-preview",
+      messages: [
+        { role: "system", content: "You are analyzing an entrepreneur's response in Shark Tank. Return ONLY a JSON object with no additional formatting or text." },
+        { role: "user", content: prompt }
+      ],
+      max_tokens: 150,
+      temperature: 0.3,
+    });
+
+    const content = response.choices[0].message.content?.trim() || '{}';
+    // Remove any markdown formatting if present
+    const cleanContent = content.replace(/```json\n?|\n?```/g, '');
+    const result = JSON.parse(cleanContent);
+    console.log('Player response analysis:', result);
+    return result;
+  } catch (error) {
+    console.error('Error analyzing player response:', error);
+    return {
+      isAcceptance: false,
+      isCounterOffer: false,
+      counterOfferAmount: undefined,
+      counterOfferEquity: undefined
+    };
+  }
+}
+
+// Update processUserInput function to use AI analysis
+async function processUserInput(session: GameSession, userInput: string): Promise<void> {
+  // Update conversation history
+  session.conversationHistory.push({
+    speaker: 'player',
+    text: userInput
+  });
+
+  // Update all judges' conviction
+  await Promise.all(Object.values(session.judges).map(judge => 
+    analyzeMessage(session, judge.id, userInput)
+  ));
+
+  // Process based on current stage
+  switch (session.currentStage) {
+    case 'evaluation': {
+      // Update stage progress
+      session.stageProgress++;
+      session.playerResponseCount++;
+
+      // Check if we should move to initial offers
+      if (session.playerResponseCount >= GAME_CONFIG.maxEvaluationResponses) {
+        console.log('Moving from evaluation to initial_offers stage');
+        session.currentStage = 'initial_offers';
+        session.stageProgress = 0;
+        session.playerResponseCount = 0;
+        
+        // Generate initial offers from interested judges
+        const interestedJudges = Object.values(session.judges)
+          .filter(judge => judge.convictionLevel >= 50);
+        
+        if (interestedJudges.length === 0) {
+          console.log('No interested judges, moving to closure');
+          session.currentStage = 'closure';
+        } else {
+          // Generate offers for interested judges
+          for (const judge of interestedJudges) {
+            const offer = {
+              amount: Math.round(judge.convictionLevel * 1000), // Base amount on conviction
+              equity: Math.round(judge.convictionLevel / 2), // Base equity on conviction
+              isFinal: false
+            };
+            judge.currentOffer = offer;
+            session.judgeOffers[judge.id] = offer;
+          }
+        }
+      }
+      break;
+    }
+
+    case 'initial_offers': {
+      // Check if player has responded to offers
+      const hasInterestedJudges = Object.values(session.judges)
+        .some(judge => judge.convictionLevel >= 50);
+      
+      if (!hasInterestedJudges) {
+        console.log('No interested judges remaining, moving to closure');
+        session.currentStage = 'closure';
+        session.stageProgress = 0;
+      } else {
+        // Analyze player's response using AI
+        const responseAnalysis = await analyzePlayerResponse(session, userInput);
+        
+        if (responseAnalysis.isAcceptance) {
+          console.log('Player accepted offer, moving to closure');
+          session.currentStage = 'closure';
+          session.stageProgress = 0;
+          // Find the judge with highest conviction and mark their offer as accepted
+          const highestConvictionJudge = Object.values(session.judges)
+            .filter(judge => judge.convictionLevel >= 50)
+            .sort((a, b) => b.convictionLevel - a.convictionLevel)[0];
+          session.acceptedOffer = highestConvictionJudge.id;
+        } else if (responseAnalysis.isCounterOffer) {
+          console.log('Player made counter-offer, moving to negotiation');
+          session.currentStage = 'negotiation';
+          session.stageProgress = 0;
+          session.negotiationRound = 0;
+          
+          // Update the counter-offer in the session
+          if (responseAnalysis.counterOfferAmount && responseAnalysis.counterOfferEquity) {
+            const highestConvictionJudge = Object.values(session.judges)
+              .filter(judge => judge.convictionLevel >= 50)
+              .sort((a, b) => b.convictionLevel - a.convictionLevel)[0];
+            
+            session.judgeOffers[highestConvictionJudge.id] = {
+              amount: responseAnalysis.counterOfferAmount,
+              equity: responseAnalysis.counterOfferEquity,
+              isFinal: false
+            };
+          }
+        } else {
+          console.log('Moving to negotiation stage for further discussion');
+          session.currentStage = 'negotiation';
+          session.stageProgress = 0;
+          session.negotiationRound = 0;
+        }
+      }
+      break;
+    }
+
+    case 'negotiation': {
+      // Update negotiation round
+      session.negotiationRound++;
+      session.stageProgress++;
+
+      // Check if we should force a decision
+      if (session.negotiationRound >= GAME_CONFIG.maxNegotiationRounds) {
+        console.log('Max negotiation rounds reached, moving to closure');
+        session.currentStage = 'closure';
+        session.stageProgress = 0;
+      } else {
+        // Analyze player's response using AI
+        const responseAnalysis = await analyzePlayerResponse(session, userInput);
+        
+        if (responseAnalysis.isAcceptance) {
+          console.log('Player accepted offer during negotiation, moving to closure');
+          session.currentStage = 'closure';
+          session.stageProgress = 0;
+          // Find the judge with highest conviction and mark their offer as accepted
+          const highestConvictionJudge = Object.values(session.judges)
+            .filter(judge => judge.convictionLevel >= 50)
+            .sort((a, b) => b.convictionLevel - a.convictionLevel)[0];
+          session.acceptedOffer = highestConvictionJudge.id;
+        } else if (responseAnalysis.isCounterOffer) {
+          // Update the counter-offer in the session
+          if (responseAnalysis.counterOfferAmount && responseAnalysis.counterOfferEquity) {
+            const highestConvictionJudge = Object.values(session.judges)
+              .filter(judge => judge.convictionLevel >= 50)
+              .sort((a, b) => b.convictionLevel - a.convictionLevel)[0];
+            
+            session.judgeOffers[highestConvictionJudge.id] = {
+              amount: responseAnalysis.counterOfferAmount,
+              equity: responseAnalysis.counterOfferEquity,
+              isFinal: false
+            };
+          }
+        }
+      }
+      break;
+    }
+
+    case 'closure': {
+      // Game is over, no further processing needed
+      console.log('In closure stage, no further stage transitions');
+      break;
     }
   }
-  
-  // Check if judge is out (conviction too low, or has declared out)
-  if (respondingJudge.convictionLevel < 10 || reply.toLowerCase().includes("i'm out") || reply.toLowerCase().includes("im out")) {
-    respondingJudge.isOut = true;
-    session.judgesOut.add(respondingJudge.id);
-  }
-  
-  // Add reply to conversation history
-  session.conversationHistory.push({ speaker: 'judge', text: reply });
-  
-  // Update session timestamp
+
+  // Update last updated timestamp
   session.lastUpdatedAt = new Date();
-  
-  // Generate audio response if needed
-  let audioUrl = '';
-  if (mode === 'audio') {
-    audioUrl = await textToSpeech(reply, respondingJudge.voiceId);
-  }
-  
-  return { reply, audioUrl, respondingJudge };
 }
 
-// Simplified /reply endpoint
+// Update the reply endpoint to use generateJudgeResponse
 fishtankRouter.post('/reply', async (req: Request, res: Response) => {
-  const { sessionId, message, mode = 'text' } = req.body;
+  console.log('Received reply request:', req.body);
+  const { sessionId, message } = req.body;
 
   // Validate session and message
   if (!sessionId || !sessions[sessionId]) {
+    console.log('Session not found:', sessionId);
     res.status(404).json({ error: 'Session not found' });
     return;
   }
   if (!message || typeof message !== 'string') {
+    console.log('Invalid message:', message);
     res.status(400).json({ error: 'Message is required' });
     return;
   }
 
   try {
     const session = sessions[sessionId];
+    console.log('Processing message for session:', sessionId);
+    console.log('Current stage:', session.currentStage);
+    console.log('Stage progress:', session.stageProgress);
+    console.log('Player response count:', session.playerResponseCount);
     
     // Process the user input
-    const { reply, audioUrl, respondingJudge } = await processUserInput(
-      session, 
-      message, 
-      mode as 'text' | 'audio'
-    );
+    await processUserInput(session, message);
     
-    // Return response with judge information
+    // Log stage after processing
+    console.log('Stage after processing:', session.currentStage);
+    console.log('Stage progress after processing:', session.stageProgress);
+    console.log('Player response count after processing:', session.playerResponseCount);
+    
+    // Determine which judges should reply based on stage
+    let replyingJudges: Judge[] = [];
+    if (session.currentStage === 'evaluation') {
+      replyingJudges = Object.values(session.judges).slice(0, 2); // Only two judges
+    } else {
+      // For offers/negotiation/closure, filter by conviction
+      replyingJudges = Object.values(session.judges)
+        .filter(judge => judge.convictionLevel >= 20)
+        .sort((a, b) => b.convictionLevel - a.convictionLevel)
+        .slice(0, 2);
+    }
+    console.log('Replying judges:', replyingJudges.map(j => j.name));
+    
+    // Generate responses from selected judges
+    let firstJudgeResponse = '';
+    const replies = [];
+    for (let idx = 0; idx < replyingJudges.length; idx++) {
+      const judge = replyingJudges[idx];
+      let response;
+      if (idx === 0) {
+        // First judge: normal prompt (can ask a question)
+        response = await generateJudgeResponse(session, judge.id, message);
+        firstJudgeResponse = response;
+      } else {
+        // Second judge: comment/context only, no new question or topic
+        const previousJudge = replyingJudges[0];
+        const contextPrompt = `\nThe previous judge (${previousJudge.name}) just said: "${firstJudgeResponse}"\nYour job is to comment on their point, add context, agree, disagree, or provide your perspective, but do NOT ask for more information, do NOT introduce a new topic, and do NOT ask a new question. Do not repeat what has already been said.\n`;
+        response = await generateJudgeResponse(session, judge.id, message, contextPrompt);
+      }
+      
+      // Add judge response to conversation history
+      session.conversationHistory.push({
+        speaker: 'judge',
+        text: response,
+        judge: formatJudgeForResponse(judge)
+      });
+      
+      replies.push({
+        text: response,
+        audioUrl: null, // We'll add audio generation later
+        judge: formatJudgeForResponse(judge)
+      });
+    }
+    
+    console.log('Generated replies:', replies);
+    
+    // Return responses with judge information
     res.json({ 
-      reply,
-      audioUrl,
-      judge: formatJudgeForResponse(respondingJudge),
+      replies,
       allJudges: Object.values(session.judges).map(formatJudgeForResponse)
     });
   } catch (error) {
     console.error('Error processing reply:', error);
-    res.status(500).json({ error: 'Error generating response' });
+    res.status(500).json({ error: 'Error processing reply' });
   }
 });
 
-// Simplified /audio-reply endpoint
+// Update the audio-reply endpoint to handle multiple responses
 fishtankRouter.post('/audio-reply', upload.single('audio'), async (req: Request, res: Response) => {
   try {
     const { sessionId } = req.body;
@@ -741,23 +782,72 @@ fishtankRouter.post('/audio-reply', upload.single('audio'), async (req: Request,
     }
     
     // Process the transcribed input
-    const { reply, audioUrl, respondingJudge } = await processUserInput(
-      session, 
-      transcription, 
-      'audio'
-    );
+    await processUserInput(session, transcription);
     
-    // Return response with judge information
+    // Return responses with judge information
     res.json({ 
-      reply,
-      audioUrl,
+      replies: session.conversationHistory.slice(-5),
       transcription,
-      judge: formatJudgeForResponse(respondingJudge),
       allJudges: Object.values(session.judges).map(formatJudgeForResponse)
     });
   } catch (error) {
     console.error('Error processing audio reply:', error);
     res.status(500).json({ error: 'Error processing audio reply' });
+  }
+});
+
+// Endpoint: Generate AI player reply
+fishtankRouter.post('/ai-player-reply', async (req: Request, res: Response) => {
+  const { sessionId } = req.body;
+  if (!sessionId || !sessions[sessionId]) {
+    res.status(404).json({ error: 'Session not found' });
+    return;
+  }
+  const session = sessions[sessionId];
+  
+  console.log('Generating AI player response for stage:', session.currentStage);
+  console.log('Stage progress:', session.stageProgress);
+  console.log('Player response count:', session.playerResponseCount);
+  
+  // Get the last 5 messages for better context
+  const recentMessages = session.conversationHistory.slice(-5);
+  console.log('Recent messages for AI player response:', recentMessages);
+  
+  const prompt = `You are an entrepreneur on Shark Tank. The game is currently in the ${session.currentStage} stage. Here's the recent conversation:
+
+${recentMessages.map(m => `${m.speaker === 'judge' ? m.judge?.name : 'You'}: ${m.text}`).join('\n')}
+
+Based on the conversation and current stage (${session.currentStage}), craft a natural, engaging response that:
+1. Directly addresses the most recent judge(s) who spoke and their specific questions/points
+2. Maintains your business vision
+3. Is persuasive and specific
+4. Sounds like a real person speaking
+5. Adapts to the current stage:
+   - In evaluation: Focus on answering questions and building credibility
+   - In initial_offers: Interested judges will make offers
+   - In negotiation: Players can make counter-offers or accept the offer. In case of counter-offers, the judge will respond with a new offer.
+   - In closure: Player can accept or reject the final offer. Judges will not entertain any counter-offers in this stage. They will express their closing thoughts based on the player's response.
+
+Keep your response concise (1-3 sentences).`;
+
+  console.log('AI Player Response Prompt:', prompt);
+
+  try {
+    const response = await openai.chat.completions.create({
+      model: "gpt-4-turbo-preview",
+      messages: [
+        { role: "system", content: "You are a confident, passionate entrepreneur pitching your startup on Shark Tank. Your responses should be natural, engaging, and directly address the judges' points while maintaining your business vision." },
+        { role: "user", content: prompt }
+      ],
+      max_tokens: 150,
+      temperature: 0.7,
+    });
+    const reply = response.choices[0].message.content?.trim() || '';
+    console.log('AI Player Response:', reply);
+    res.json({ reply });
+  } catch (error) {
+    console.error('Error generating AI player reply:', error);
+    res.status(500).json({ error: 'Failed to generate AI reply' });
   }
 });
 
@@ -767,14 +857,10 @@ function formatJudgeForResponse(judge: Judge) {
     id: judge.id,
     name: judge.name,
     persona: judge.persona,
-    convictionLevel: judge.convictionLevel,
-    inNegotiation: judge.inNegotiation,
-    isOut: judge.isOut,
-    keyParameters: judge.keyParameters.map(param => ({
-      name: param.name,
-      weight: param.weight,
-      satisfied: param.satisfied
-    }))
+    convictionLevel: Math.round(judge.convictionLevel),
+    inNegotiation: false,
+    isOut: judge.convictionLevel < 20,
+    talkTimeSeconds: 0
   };
 }
 
@@ -791,36 +877,6 @@ async function transcribeAudio(audioFilePath: string): Promise<string> {
     return transcription.text || '';
   } catch (error) {
     console.error('Error transcribing audio:', error);
-    return '';
-  }
-}
-
-// Helper function to generate audio from text using ElevenLabs
-async function textToSpeech(text: string, voiceId: string): Promise<string> {
-  try {
-    const audioFilename = `${uuidv4()}.mp3`;
-    const audioFilePath = path.join(FISHTANK_AUDIO_DIR, audioFilename);
-    
-    // Generate audio with ElevenLabs (returns a stream)
-    const audioStream = await elevenLabs.generate({
-      voice: voiceId,
-      text: text,
-      model_id: "eleven_multilingual_v1"
-    });
-    
-    // Create write stream
-    const writeStream = fs.createWriteStream(audioFilePath);
-    
-    // Pipe the audio stream to the file
-    await new Promise<void>((resolve, reject) => {
-      writeStream.on('finish', () => resolve());
-      writeStream.on('error', reject);
-      audioStream.pipe(writeStream);
-    });
-    
-    return `/api/fishtank/audio/${audioFilename}`;
-  } catch (error) {
-    console.error('Error generating audio:', error);
     return '';
   }
 }
