@@ -6,6 +6,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { ElevenLabsClient } from 'elevenlabs';
 import OpenAI from 'openai';
 import dotenv from 'dotenv';
+import axios from 'axios';
 
 // Load environment variables
 dotenv.config();
@@ -144,7 +145,14 @@ class JudgeManager {
         name: "Namita Thapar",
         voiceId: "7XWoY4Z0vEgFmvOBMut1",
         persona: "Decisive, expertise-driven pharma expert",
-        prompt: "You are Namita Thapar, the Shark Tank India judge renowned for your domain expertise in healthcare and pharma. Keep responses brief (1-3 sentences). Focus on healthcare, pharma, and solid unit economics.",
+        prompt: `You are Namita Thapar, the Shark Tank India judge renowned for your domain expertise in healthcare and pharma. Keep responses brief (1-3 sentences). Focus on healthcare, pharma, and solid unit economics.
+
+Your characteristic phrases:
+- "Mujhe healthcare sector mein bohot experience hai"
+- "Unit economics kya hai?"
+- "Aapka business model sustainable hai?"
+
+You often use these phrases naturally in your responses.`,
         convictionLevel: 40,
         questionsAsked: 0,
         currentOffer: null
@@ -154,7 +162,15 @@ class JudgeManager {
         name: "Aman Gupta",
         voiceId: "PWuKnjMQhLOeUlRE7jgL",
         persona: "Strategic, marketing and brand expert",
-        prompt: "You are Aman Gupta, the Shark Tank India judge and co-founder of boAt. Keep responses brief (1-3 sentences). Focus on brand potential, marketing strategy, and customer loyalty.",
+        prompt: `You are Aman Gupta, the Shark Tank India judge and co-founder of boAt. Keep responses brief (1-3 sentences). Focus on brand potential, marketing strategy, and customer loyalty.
+
+Your characteristic phrases:
+- "Hum bhi bana lenge"
+- "Shark Tank ki Pitch ho ya Cricket ki... Jeetna humein aata hai"
+- "Brand building ke liye kya plan hai?"
+- "Customer acquisition cost kya hai?"
+
+You often use these phrases naturally in your responses.`,
         convictionLevel: 50,
         questionsAsked: 0,
         currentOffer: null
@@ -164,7 +180,15 @@ class JudgeManager {
         name: "Ashneer Grover",
         voiceId: "TWdmNgGcFTnP8osgYASY",
         persona: "Blunt, analytical, focused on valuation and financials",
-        prompt: "You are Ashneer Grover, the Shark Tank India judge known for your blunt style. Keep responses brief (1-3 sentences). Focus on business model, valuation, and financials.",
+        prompt: `You are Ashneer Grover, the Shark Tank India judge known for your blunt style. Keep responses brief (1-3 sentences). Focus on business model, valuation, and financials.
+
+Your characteristic phrases:
+- "Ye valuation bohot high hai"
+- "Aapka business model clear nahi hai"
+- "Mujhe samajh nahi aa raha hai"
+- "Ye kya bakwas hai?"
+
+You often use these phrases naturally in your responses.`,
         convictionLevel: 35,
         questionsAsked: 0,
         currentOffer: null
@@ -298,6 +322,19 @@ fishtankRouter.get('/session/:sessionId', (req: Request, res: Response) => {
   });
 });
 
+// Helper function to format judge data for response
+function formatJudgeForResponse(judge: Judge) {
+  return {
+    id: judge.id,
+    name: judge.name,
+    persona: judge.persona,
+    convictionLevel: Math.round(judge.convictionLevel),
+    inNegotiation: false,
+    isOut: judge.convictionLevel < 20,
+    talkTimeSeconds: 0
+  };
+}
+
 // Add function to extract offer details
 async function extractOfferDetails(response: string): Promise<{ amount: number; equity: number } | null> {
   try {
@@ -338,6 +375,18 @@ If no clear offer is made, return null.`;
 async function generateJudgeResponse(session: GameSession, judgeId: string, userMessage: string, contextPrompt?: string): Promise<string> {
   const judge = session.judges[judgeId];
   
+  // Special closure phase prompt
+  let closurePrompt = '';
+  if (session.currentStage === 'closure') {
+    if (session.acceptedOffer === judge.id) {
+      closurePrompt = `\nYour offer was accepted! Congratulate the entrepreneur, express your excitement about working together, and mention how you will help them grow. Be warm and enthusiastic.`;
+    } else if (session.acceptedOffer) {
+      closurePrompt = `\nYour offer was not accepted. Express disappointment but wish the entrepreneur well and offer encouragement.`;
+    } else {
+      closurePrompt = `\nNo offers were accepted. Console the entrepreneur, offer encouragement, and wish them luck for the future.`;
+    }
+  }
+
   const prompt = `
 You are ${judge.name}, a Shark Tank judge with this persona: ${judge.persona}
 
@@ -350,7 +399,7 @@ ${session.conversationHistory.slice(-5).map(d => `${d.speaker}: ${d.text}`).join
 
 Entrepreneur's message: "${userMessage}"
 ${contextPrompt ? contextPrompt : ''}
-
+${closurePrompt}
 ${session.currentStage === 'initial_offers' ? `
 IMPORTANT: You must make a specific offer that includes:
 1. A dollar amount (e.g., $500,000)
@@ -359,13 +408,14 @@ IMPORTANT: You must make a specific offer that includes:
 Express your offer in your own natural language, but make sure to clearly state both the amount and equity percentage.
 If you're not interested, indicate that you're out or not interested.` : ''}
 
-Respond with 1-3 sentences. If your conviction is below 20, indicate you're out.`;
+Respond with 1-3 sentences. If your conviction is below 20, indicate you're out.
+IMPORTANT: Use your characteristic Hindi phrases naturally in your response. Mix English and Hindi (transliterated) in your responses like the real judges do.`;
 
   try {
     const response = await openai.chat.completions.create({
       model: "gpt-4-turbo-preview",
       messages: [
-        { role: "system", content: "You are a Shark Tank judge evaluating a pitch." },
+        { role: "system", content: "You are a Shark Tank judge evaluating a pitch. You naturally mix English and Hindi (transliterated) in your responses, using your characteristic catchphrases." },
         { role: "user", content: prompt }
       ],
       max_tokens: 150,
@@ -376,7 +426,7 @@ Respond with 1-3 sentences. If your conviction is below 20, indicate you're out.
       "I need to think about this more.";
     
     // Update judge state based on response
-    if (reply.toLowerCase().includes("i'm out") || reply.toLowerCase().includes("im out")) {
+    if (reply.toLowerCase().includes("i'm out") || reply.toLowerCase().includes("im out") || reply.toLowerCase().includes("out")) {
       judge.convictionLevel = 0; // Set conviction to 0 to indicate out
     } else if (session.currentStage === 'initial_offers') {
       // Extract offer details using AI
@@ -665,7 +715,92 @@ async function processUserInput(session: GameSession, userInput: string): Promis
   session.lastUpdatedAt = new Date();
 }
 
-// Update the reply endpoint to use generateJudgeResponse
+// Helper function to generate judge audio using ElevenLabs
+async function generateJudgeAudio(text: string, voiceId: string): Promise<string | null> {
+  try {
+    const audioFileName = `judge_${voiceId}_${Date.now()}.mp3`;
+    const audioFilePath = path.join(FISHTANK_AUDIO_DIR, audioFileName);
+
+    // Call ElevenLabs API
+    const response = await axios({
+      method: 'post',
+      url: `https://api.elevenlabs.io/v1/text-to-speech/${voiceId}`,
+      data: {
+        text,
+        model_id: 'eleven_multilingual_v2',
+        voice_settings: {
+          stability: 0.5,
+          similarity_boost: 1.0,
+          style: 0.5,
+          use_speaker_boost: true,
+          speed: 1.1
+        }
+      },
+      headers: {
+        'Accept': 'audio/mpeg',
+        'Content-Type': 'application/json',
+        'xi-api-key': process.env.ELEVENLABS_API_KEY || ''
+      },
+      responseType: 'arraybuffer'
+    });
+
+    // Save the audio file
+    fs.writeFileSync(audioFilePath, response.data);
+    // Return the URL for the frontend
+    return `/api/fishtank/audio/${audioFileName}`;
+  } catch (error) {
+    console.error('Error generating judge audio:', error);
+    return null;
+  }
+}
+
+// Update generateAndRecordJudgeReplies to generate audio for each reply
+async function generateAndRecordJudgeReplies(session: GameSession, userMessage: string) {
+  // Determine which judges should reply based on stage
+  let replyingJudges: Judge[] = [];
+  if (session.currentStage === 'evaluation') {
+    replyingJudges = Object.values(session.judges).slice(0, 2); // Only two judges
+  } else {
+    // For offers/negotiation/closure, filter by conviction
+    replyingJudges = Object.values(session.judges)
+      .filter(judge => judge.convictionLevel >= 20)
+      .sort((a, b) => b.convictionLevel - a.convictionLevel)
+      .slice(0, 2);
+  }
+  // Generate responses from selected judges
+  let firstJudgeResponse = '';
+  const replies = [];
+  for (let idx = 0; idx < replyingJudges.length; idx++) {
+    const judge = replyingJudges[idx];
+    let response;
+    if (idx === 0) {
+      // First judge: normal prompt (can ask a question)
+      response = await generateJudgeResponse(session, judge.id, userMessage);
+      firstJudgeResponse = response;
+    } else {
+      // Second judge: comment/context only, no new question or topic
+      const previousJudge = replyingJudges[0];
+      const contextPrompt = `\nThe previous judge (${previousJudge.name}) just said: "${firstJudgeResponse}"\nYour job is to comment on their point, add context, agree, disagree, or provide your perspective, but do NOT ask for more information, do NOT introduce a new topic, and do NOT ask a new question. Do not repeat what has already been said.\n`;
+      response = await generateJudgeResponse(session, judge.id, userMessage, contextPrompt);
+    }
+    // Add judge response to conversation history
+    session.conversationHistory.push({
+      speaker: 'judge',
+      text: response,
+      judge: formatJudgeForResponse(judge)
+    });
+    // Generate audio for the judge response
+    const audioUrl = await generateJudgeAudio(response, judge.voiceId);
+    replies.push({
+      text: response,
+      audioUrl,
+      judge: formatJudgeForResponse(judge)
+    });
+  }
+  return replies;
+}
+
+// Update the reply endpoint to use generateAndRecordJudgeReplies
 fishtankRouter.post('/reply', async (req: Request, res: Response) => {
   console.log('Received reply request:', req.body);
   const { sessionId, message } = req.body;
@@ -697,51 +832,8 @@ fishtankRouter.post('/reply', async (req: Request, res: Response) => {
     console.log('Stage progress after processing:', session.stageProgress);
     console.log('Player response count after processing:', session.playerResponseCount);
     
-    // Determine which judges should reply based on stage
-    let replyingJudges: Judge[] = [];
-    if (session.currentStage === 'evaluation') {
-      replyingJudges = Object.values(session.judges).slice(0, 2); // Only two judges
-    } else {
-      // For offers/negotiation/closure, filter by conviction
-      replyingJudges = Object.values(session.judges)
-        .filter(judge => judge.convictionLevel >= 20)
-        .sort((a, b) => b.convictionLevel - a.convictionLevel)
-        .slice(0, 2);
-    }
-    console.log('Replying judges:', replyingJudges.map(j => j.name));
-    
-    // Generate responses from selected judges
-    let firstJudgeResponse = '';
-    const replies = [];
-    for (let idx = 0; idx < replyingJudges.length; idx++) {
-      const judge = replyingJudges[idx];
-      let response;
-      if (idx === 0) {
-        // First judge: normal prompt (can ask a question)
-        response = await generateJudgeResponse(session, judge.id, message);
-        firstJudgeResponse = response;
-      } else {
-        // Second judge: comment/context only, no new question or topic
-        const previousJudge = replyingJudges[0];
-        const contextPrompt = `\nThe previous judge (${previousJudge.name}) just said: "${firstJudgeResponse}"\nYour job is to comment on their point, add context, agree, disagree, or provide your perspective, but do NOT ask for more information, do NOT introduce a new topic, and do NOT ask a new question. Do not repeat what has already been said.\n`;
-        response = await generateJudgeResponse(session, judge.id, message, contextPrompt);
-      }
-      
-      // Add judge response to conversation history
-      session.conversationHistory.push({
-        speaker: 'judge',
-        text: response,
-        judge: formatJudgeForResponse(judge)
-      });
-      
-      replies.push({
-        text: response,
-        audioUrl: null, // We'll add audio generation later
-        judge: formatJudgeForResponse(judge)
-      });
-    }
-    
-    console.log('Generated replies:', replies);
+    // Generate and record judge replies
+    const replies = await generateAndRecordJudgeReplies(session, message);
     
     // Return responses with judge information
     res.json({ 
@@ -754,7 +846,7 @@ fishtankRouter.post('/reply', async (req: Request, res: Response) => {
   }
 });
 
-// Update the audio-reply endpoint to handle multiple responses
+// Update the audio-reply endpoint to use generateAndRecordJudgeReplies
 fishtankRouter.post('/audio-reply', upload.single('audio'), async (req: Request, res: Response) => {
   try {
     const { sessionId } = req.body;
@@ -784,9 +876,12 @@ fishtankRouter.post('/audio-reply', upload.single('audio'), async (req: Request,
     // Process the transcribed input
     await processUserInput(session, transcription);
     
+    // Generate and record judge replies
+    const replies = await generateAndRecordJudgeReplies(session, transcription);
+    
     // Return responses with judge information
     res.json({ 
-      replies: session.conversationHistory.slice(-5),
+      replies,
       transcription,
       allJudges: Object.values(session.judges).map(formatJudgeForResponse)
     });
@@ -850,19 +945,6 @@ Keep your response concise (1-3 sentences).`;
     res.status(500).json({ error: 'Failed to generate AI reply' });
   }
 });
-
-// Helper function to format judge data for response
-function formatJudgeForResponse(judge: Judge) {
-  return {
-    id: judge.id,
-    name: judge.name,
-    persona: judge.persona,
-    convictionLevel: Math.round(judge.convictionLevel),
-    inNegotiation: false,
-    isOut: judge.convictionLevel < 20,
-    talkTimeSeconds: 0
-  };
-}
 
 // Helper function to transcribe audio using ElevenLabs
 async function transcribeAudio(audioFilePath: string): Promise<string> {

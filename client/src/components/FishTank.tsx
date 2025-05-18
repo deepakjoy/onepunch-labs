@@ -239,21 +239,21 @@ export default function FishTank() {
     formData.append('mode', 'audio');
 
     try {
-      // Add user reply (audio placeholder for now)
-      setDialogues((prev) => [
-        ...prev,
-        {
-          speaker: 'user',
-          text: '[Audio message]',
-        },
-      ]);
-
       // Send to backend
       const res = await fetch('/api/fishtank/audio-reply', {
         method: 'POST',
         body: formData,
       });
       const data = await res.json();
+
+      // Add user reply (show transcription if available)
+      setDialogues((prev) => [
+        ...prev,
+        {
+          speaker: 'user',
+          text: data.transcription || '[Audio message]',
+        },
+      ]);
 
       // Add all judge replies
       const newDialogues = data.replies.map((reply: JudgeReply) => ({
@@ -263,14 +263,6 @@ export default function FishTank() {
         judge: reply.judge,
       }));
       setDialogues((prev) => [...prev, ...newDialogues]);
-
-      // Auto-play the responses if available
-      data.replies.forEach((reply: JudgeReply) => {
-        if (reply.audioUrl) {
-          const audio = new Audio(reply.audioUrl);
-          audio.play();
-        }
-      });
 
       // Update all judges
       if (data.allJudges) {
@@ -412,7 +404,7 @@ export default function FishTank() {
                 <p>{d.text}</p>
                 {d.audioUrl && (
                   <audio controls className="mt-2">
-                    <source src={d.audioUrl} type="audio/wav" />
+                    <source src={d.audioUrl} type="audio/mpeg" />
                     Your browser does not support the audio element.
                   </audio>
                 )}
@@ -440,9 +432,6 @@ export default function FishTank() {
                 disabled={loading || isAITyping}
                 className="text-input"
               />
-              <button type="submit" disabled={loading || isAITyping} className="submit-button">
-                {loading ? 'Sending...' : 'Send'}
-              </button>
               <button
                 type="button"
                 onClick={async () => {
@@ -470,6 +459,9 @@ export default function FishTank() {
                 className="ai-button"
               >
                 🤖 AI
+              </button>
+              <button type="submit" disabled={loading || isAITyping} className="submit-button">
+                {loading ? 'Thinking...' : 'Send'}
               </button>
             </form>
           ) : (
@@ -510,12 +502,32 @@ export default function FishTank() {
           )}
 
           <div className="mode-toggle">
-            <button onClick={() => setMode('text')} className={mode === 'text' ? 'active' : ''}>
+            <label
+              style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', cursor: 'pointer' }}
+            >
+              <input
+                type="radio"
+                name="mode"
+                value="text"
+                checked={mode === 'text'}
+                onChange={() => setMode('text')}
+                style={{ accentColor: '#4299e1' }}
+              />
               Text
-            </button>
-            <button onClick={() => setMode('audio')} className={mode === 'audio' ? 'active' : ''}>
+            </label>
+            <label
+              style={{ display: 'flex', alignItems: 'center', gap: '0.25rem', cursor: 'pointer' }}
+            >
+              <input
+                type="radio"
+                name="mode"
+                value="audio"
+                checked={mode === 'audio'}
+                onChange={() => setMode('audio')}
+                style={{ accentColor: '#4299e1' }}
+              />
               Audio
-            </button>
+            </label>
           </div>
         </div>
       </div>
