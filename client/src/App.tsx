@@ -9,9 +9,11 @@ import {
   FolderIcon,
   HomeIcon,
   XMarkIcon,
+  PuzzlePieceIcon,
 } from '@heroicons/react/24/outline';
 import VoiceCoach from '@components/VoiceCoach';
 import FishTank from '@components/FishTank';
+import BoardGame from '@components/BoardGame';
 
 type NavigationItem = {
   name: string;
@@ -24,6 +26,7 @@ const navigation: NavigationItem[] = [
   { name: 'Home', href: '/', icon: HomeIcon },
   { name: 'Voice coach', href: '/voice-coach', icon: FolderIcon },
   { name: 'Fish Tank', href: '/fish-tank', icon: CalendarIcon },
+  { name: 'Board Game', href: '/board-game', icon: PuzzlePieceIcon },
 ];
 const projects = [
   { id: 1, name: 'Voice Coach', href: '#', initial: 'H', current: false },
@@ -245,6 +248,7 @@ export default function Example() {
           <Route path="/" element={<div className="px-4 sm:px-6 lg:px-8">Home</div>} />
           <Route path="/voice-coach" element={<VoiceCoach />} />
           <Route path="/fish-tank" element={<FishTank />} />
+          <Route path="/board-game" element={<BoardGame />} />
         </Routes>
       </main>
     </div>
